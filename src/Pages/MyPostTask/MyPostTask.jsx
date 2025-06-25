@@ -75,7 +75,7 @@ const MyPostTask = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:mx-24 md:mx-12 mx-4 border lg:px-16 md:px-10 px-4 py-12 my-12 rounded-2xl border-indigo-200 shadow"
+            className="rounded"
         >
             <h2 className="text-3xl text-primary text-center font-bold mb-6">
                 <Typewriter

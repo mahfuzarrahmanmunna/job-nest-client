@@ -19,7 +19,7 @@ const MyPostTable = ({ task, index, handleDeleteFormDB, setSelectedTask }) => {
             <td className="px-4 py-2 dark:text-white border">${budget}</td>
             <td className="px-4 py-2 dark:text-white border">{new Date(formateDate).toLocaleDateString()}</td>
             <td className="px-4 py-2 dark:text-white border lg:space-y-0 space-y-2 lg:space-x-2">
-                <Link to={`/updated-task/${_id}`} className="btn btn-info  btn-sm text-white">
+                <Link to={`/dashboard/updated-task/${_id}`} className="btn btn-info  btn-sm text-white">
                     <Edit size={15} />
                 </Link>
                 <button

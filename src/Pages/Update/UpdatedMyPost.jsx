@@ -16,11 +16,6 @@ const UpdatedMyPost = () => {
     const { user } = useContext(AuthContext);
     // console.log('photo', user?.photoURL);
 
-    if (!data) {
-        return <Fallback />; // Assuming Fallback is a component that handles loading state or errors
-    }
-
-
     const {
         title,
         category,
@@ -81,16 +76,20 @@ const UpdatedMyPost = () => {
 
     };
 
+    if (!data) {
+        return <Fallback />; // Assuming Fallback is a component that handles loading state or errors
+    }
+
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:px-24 md:px-12 mx-auto px-4 pb-12"
         >
             <form
                 onSubmit={handleUpdatedTask}
-                className="bg-white dark:bg-gray-800 py-12 lg:px-24 mt-12 md:px-12 px-4 rounded-2xl shadow-lg border border-indigo-100"
+                className="bg-white dark:bg-gray-800 rounded"
             >
                 <Fade direction='down'>
                     <h1 className="text-center text-3xl font-bold text-primary mb-2">

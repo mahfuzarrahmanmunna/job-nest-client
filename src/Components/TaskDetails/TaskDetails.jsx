@@ -16,7 +16,7 @@ const TaskDetails = () => {
     const task = useLoaderData();
     const location = useLocation();
     const path = location.pathname;
-    const result = path.replace('/browse-tasks/', '');
+    const result = path.replace('/dashboard/browse-tasks/', '');
 
 
     const {

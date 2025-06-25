@@ -1,75 +1,94 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { BiLeftArrow } from 'react-icons/bi';
-import { Outlet, NavLink, Link } from 'react-router';
-import axios from 'axios';
-import { AuthContext } from '../../Context/AuthContext';
+import { useState } from 'react';
+import { LayoutDashboard } from 'lucide-react';
+import { BiLeftArrow, BiLogOut } from 'react-icons/bi';
+import { HiOutlineDotsVertical } from 'react-icons/hi';
+import { Outlet, NavLink, Link } from 'react-router'; // ✅ use react-router-dom not react-router
+import { BsPersonFillExclamation } from 'react-icons/bs';
 
 const DashBoardLayouts = () => {
-    const { user } = useContext(AuthContext);
-    const [totalTasks, setTotalTasks] = useState(0);
-    const [myTasks, setMyTasks] = useState(0);
-    const [totalUsers, setTotalUsers] = useState(0);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    useEffect(() => {
-        axios.get('https://freelance-task-marketplace-server.vercel.app/tasks-nest')
-            .then(res => {
-                setTotalTasks(res.data.length);
-                const userTasks = res.data.filter(task => task.email === user?.email);
-                setMyTasks(userTasks.length);
-            });
-        axios.get('https://freelance-task-marketplace-server.vercel.app/users')
-            .then(res => setTotalUsers(res.data.length));
-    }, [user?.email]);
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
 
     return (
-        <div className="flex min-h-screen">
-            <aside className="w-64 bg-gray-100 dark:bg-gray-900 p-6">
-                <Link to='/' className='flex items-center mb-6'>
+        <div className="flex flex-col lg:flex-row min-h-screen">
+            {/* Mobile Navbar */}
+            <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-base-100 dark:bg-gray-900 shadow">
+                <Link to="/" className="flex items-center gap-2">
                     <BiLeftArrow />
-                    <img src="https://i.ibb.co/4gFKt7dG/Chat-GPT-Image-Jun-25-2025-10-13-36-PMcopy.png" alt="Logo" className="ml-2 w-24" />
+                    <span className="font-bold">Home</span>
                 </Link>
-                <h2 className="text-xl font-bold mb-6">📊 Dashboard</h2>
-                <ul className="space-y-4 font-medium">
-                    <li>
-                        <NavLink to="/dashboard/add-task" className={({ isActive }) => isActive ? "underline text-primary" : "text-gray-600 dark:text-white"}>
-                            Add Task
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "underline text-primary" : "text-gray-600 dark:text-white"}>
-                            Browse All Task
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/my-posted-tasks" className={({ isActive }) => isActive ? "underline text-primary" : "text-gray-600 dark:text-white"}>
-                            My Posted Task
-                        </NavLink>
-                    </li>
-                </ul>
-            </aside>
+                <button onClick={toggleSidebar} className="text-xl">
+                    <HiOutlineDotsVertical />
+                </button>
+            </div>
 
-            <main className="flex-1 p-6 bg-white dark:bg-gray-800">
-                {/* 🔥 Stats Always Visible */}
-                <h2 className="text-3xl font-bold mb-8">👋 Welcome, {user?.displayName || "User"}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-
-                    <div className="bg-blue-100 dark:bg-blue-800 p-6 rounded-lg shadow text-center">
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Total Tasks</h3>
-                        <p className="text-4xl font-bold text-blue-700 dark:text-white">{totalTasks}</p>
+            {/* Sidebar */}
+            <aside
+                className={`bg-gray-200 dark:bg-gray-900 p-6 w-64 transition-all z-50 duration-300 lg:block ${sidebarOpen ? 'block' : 'hidden'
+                    } fixed lg:static top-0 left-0 h-screen flex flex-col justify-between`} // ✅ h-screen + flex-col
+            >
+                {/* Top Section */}
+                <div className=''>
+                    <div className="flex justify-between items-center mb-6 lg:hidden">
+                        <h2 className="text-lg font-bold">Dashboard</h2>
+                        <button onClick={toggleSidebar} className="text-xl">✕</button>
                     </div>
 
-                    <div className="bg-green-100 dark:bg-green-800 p-6 rounded-lg shadow text-center">
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">My Tasks</h3>
-                        <p className="text-4xl font-bold text-green-700 dark:text-white">{myTasks}</p>
-                    </div>
+                    <Link to="/" className="flex items-center mb-6">
+                        <BiLeftArrow />
+                        <img
+                            src="https://i.ibb.co/4gFKt7dG/Chat-GPT-Image-Jun-25-2025-10-13-36-PMcopy.png"
+                            alt="Logo"
+                            className="ml-2 w-24"
+                        />
+                    </Link>
 
-                    <div className="bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow text-center">
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Total Users</h3>
-                        <p className="text-4xl font-bold text-purple-700 dark:text-white">{totalUsers}</p>
-                    </div>
+                    <Link to="/dashboard" className="text-xl font-bold mb-6 flex items-center gap-2">
+                        <LayoutDashboard /> Dashboard
+                    </Link>
+
+                    <ul className="space-y-4 font-medium">
+                        <li>
+                            <NavLink to="/dashboard/add-task" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                                Add Task
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                                Browse All Task
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard/my-posted-tasks" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                                My Posted Task
+                            </NavLink>
+                        </li>
+                    </ul>
                 </div>
 
-                {/* Render Child Page Content */}
+                {/* Bottom Section - Profile and Logout */}
+                <div className="mt-6 border-t flex flex-col  border-indigo-300 dark:border-indigo-700 pt-4">
+                    <div className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+                        Logged in as <span className="font-semibold">Munna</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <Link to="/profile" className="text-sm text-blue-600 hover:underline dark:text-blue-400 flex btn btn-block">
+                            <BsPersonFillExclamation /> Profile
+                        </Link>
+                        <button
+                            onClick={() => console.log('Logout')} // replace with actual logout logic
+                            className="text-sm flex items-center gap-2 btn text-red-600 hover:underline dark:text-red-400"
+                        >
+                            <BiLogOut /> Logout
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            {/* Main Content */}
+            <main className="flex-1 p-6 mt-4 lg:mt-0 bg-base-100 dark:bg-gray-800 ml-0 lg:ml-0">
                 <Outlet />
             </main>
         </div>

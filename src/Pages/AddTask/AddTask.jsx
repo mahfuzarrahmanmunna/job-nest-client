@@ -63,11 +63,10 @@ const AddTask = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:px-24 md:px-12 mx-auto px-4 pb-12"
         >
             <form
                 onSubmit={handleAddTask}
-                className="bg-white dark:bg-gray-800 py-12 lg:px-24 mt-12 md:px-12 px-4 rounded-2xl shadow-lg border border-indigo-100"
+                className="bg-white dark:bg-gray-800 rounded "
             >
                 <Fade direction='down'>
                     <h1 className="text-center text-3xl font-bold text-primary mb-2">
@@ -80,7 +79,7 @@ const AddTask = () => {
                     </p>
                 </Fade>
 
-                <div className="lg:grid space-y-6 md:grid-cols-1 lg:grid-cols-2  px-4 gap-6">
+                <div className="lg:grid space-y-6 md:grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Title */}
                     <fieldset className="w-full">
                         <label className="dark:text-gray-100 label font-semibold">
