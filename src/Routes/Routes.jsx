@@ -19,6 +19,7 @@ import PrivateRoutes from "../Provider/Private/PrivateRoutes";
 // Dashboard Pages
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import AddTask from "../Pages/AddTask/AddTask";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -130,6 +131,14 @@ export const router = createBrowserRouter([
                     fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
+            {
+                path: 'my-profile',
+                element: (
+                    <PrivateRoutes>
+                        <Profile />
+                    </PrivateRoutes>
+                )
+            }
         ],
     },
 

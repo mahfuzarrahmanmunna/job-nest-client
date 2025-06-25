@@ -45,20 +45,28 @@ const DashBoardLayouts = () => {
                             className="ml-2 w-24"
                         />
                     </Link>
-
-                    <Link to="/dashboard" className="text-xl font-bold mb-6 flex items-center gap-2">
-                        <LayoutDashboard /> Dashboard
-                    </Link>
-
+                    <NavLink
+                        to="/dashboard"
+                        end
+                        className={({ isActive }) =>
+                            `mb-6 flex items-center gap-2 text-xl font-bold transition duration-200 ${isActive
+                                ? 'text-primary underline'
+                                : 'text-gray-600 dark:text-white hover:text-blue-600'
+                            }`
+                        }
+                    >
+                        <LayoutDashboard />
+                        Dashboard
+                    </NavLink>
                     <ul className="space-y-4 font-medium">
                         <li>
-                            <NavLink to="/dashboard/add-task" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
-                                Add Task
+                            <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                                Browse All Task
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
-                                Browse All Task
+                            <NavLink to="/dashboard/add-task" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                                Add Task
                             </NavLink>
                         </li>
                         <li>
@@ -75,7 +83,7 @@ const DashBoardLayouts = () => {
                         Logged in as <span className="font-semibold">Munna</span>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <Link to="/profile" className="text-sm text-blue-600 hover:underline dark:text-blue-400 flex btn btn-block">
+                        <Link to="/dashboard/my-profile" className="text-sm text-blue-600 hover:underline dark:text-blue-400 flex btn btn-block">
                             <BsPersonFillExclamation /> Profile
                         </Link>
                         <button

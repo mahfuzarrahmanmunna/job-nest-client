@@ -1,4 +1,5 @@
-import React, { use, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import { motion } from 'framer-motion';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,52 +11,68 @@ import usePageTitle from '../../Hooks/usePageTitle';
 import { AuthContext } from '../../Context/AuthContext';
 
 const AddTask = () => {
-    usePageTitle()
-    const { user } = use(AuthContext)
-    // const { email, displayName } = user || {}
-    // console.log(email);
+    usePageTitle();
+    const { user } = useContext(AuthContext);
     const [startDate, setStartDate] = useState(new Date());
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting }
+    } = useForm();
 
-    const handleAddTask = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const bids = 0
-        const formData = new FormData(form);
-        const formateDate = startDate.toLocaleDateString('en-CA')
-        const { title, category, budget, description, } = Object.fromEntries(formData.entries())
-        const newTaskData = {
-            title,
-            category,
-            budget,
-            description,
-            email: user?.email,
-            name: user?.displayName,
-            formateDate,
-            bids
-        }
-        // console.log(newTaskData);
+    const imgbbKey = import.meta.env.VITE_IMGBB_KEY;
 
-        // Added to post method for post data into database
-        fetch('https://freelance-task-marketplace-server.vercel.app/tasks-nest', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newTaskData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    // console.log(data);
+    const onSubmit = async (data) => {
+        const formateDate = startDate.toLocaleDateString('en-CA');
+        const bids = 0;
+
+        const imageFile = data.image[0];
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        try {
+            const imgRes = await fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
+                method: 'POST',
+                body: formData,
+            });
+            const imgData = await imgRes.json();
+            if (imgData.success) {
+                const task = {
+                    title: data.title,
+                    category: data.category,
+                    budget: data.budget,
+                    description: data.description,
+                    image: imgData.data.display_url,
+                    email: user?.email,
+                    name: user?.displayName,
+                    formateDate,
+                    bids
+                };
+
+                const res = await fetch('https://freelance-task-marketplace-server.vercel.app/tasks-nest', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(task)
+                });
+
+                const result = await res.json();
+                if (result.insertedId) {
                     Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Task added successful",
+                        icon: 'success',
+                        title: 'Task Added Successfully!',
+                        timer: 1500,
                         showConfirmButton: false,
-                        timer: 1500
+                        position: 'center'
                     });
+                    reset();
                 }
-            })
+            }
+        } catch (error) {
+            console.error("Image upload or task submission failed", error);
+        }
     };
 
     return (
@@ -64,134 +81,132 @@ const AddTask = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <form
-                onSubmit={handleAddTask}
-                className="bg-white dark:bg-gray-800 rounded "
-            >
-                <Fade direction='down'>
-                    <h1 className="text-center text-3xl font-bold text-primary mb-2">
-                        Add New Task
-                    </h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-800 rounded">
+                <Fade direction="down">
+                    <h1 className="text-center text-3xl font-bold text-primary mb-2">Add New Task</h1>
                 </Fade>
-                <Fade direction='up'>
+                <Fade direction="up">
                     <p className="mb-10 text-center text-gray-600 dark:text-gray-300">
                         Plan your workflow efficiently with a well-scheduled task.
                     </p>
                 </Fade>
 
-                <div className="lg:grid space-y-6 md:grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Title */}
-                    <fieldset className="w-full">
-                        <label className="dark:text-gray-100 label font-semibold">
+                <div className="lg:grid space-y-2 md:grid-cols-1 lg:grid-cols-2 gap-6">
+
+                    {/* Task Title */}
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-100">
                             Task Title
                             <span
                                 data-tooltip-id="title-tip"
                                 data-tooltip-content="Enter a descriptive task title"
-                                className="ml-1 cursor-pointer text-sm text-blue-500"
-                            >
-                                ⓘ
-                            </span>
+                                className="ml-1 text-blue-500 cursor-pointer text-sm"
+                            >ⓘ</span>
                             <Tooltip id="title-tip" />
                         </label>
                         <input
                             type="text"
-                            name="title"
-                            required
-                            className="input dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
+                            {...register('title', { required: true })}
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                             placeholder="E.g. Build Landing Page"
                         />
+                        {errors.title && <p className="text-red-500 text-sm mt-1">Title is required</p>}
                     </fieldset>
 
                     {/* Category */}
-                    <fieldset className="w-full">
-                        <label className="dark:text-gray-100 label font-semibold">Category</label>
-                        <select name="category" className="select select-bordered dark:bg-gray-700 dark:text-gray-200 w-full">
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-100">Category</label>
+                        <select {...register('category', { required: true })} className="select select-bordered dark:bg-gray-700 dark:text-gray-200 w-full">
                             <option value="">Select a Category</option>
-                            <option value="Web Development">Web Development</option>
-                            <option value="Design">Design</option>
-                            <option value="Content Writing">Content Writing</option>
-                            <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="Freelancer">Freelancer</option>
-                            <option value="Backend Developer">Backend Developer</option>
-                            <option value="Graphics Designer">Graphics Designer</option>
-                            <option value="Full Stack Developer">Full Stack Developer</option>
+                            <option>Web Development</option>
+                            <option>Design</option>
+                            <option>Content Writing</option>
+                            <option>Digital Marketing</option>
+                            <option>Freelancer</option>
+                            <option>Backend Developer</option>
+                            <option>Graphics Designer</option>
+                            <option>Full Stack Developer</option>
                         </select>
+                        {errors.category && <p className="text-red-500 text-sm mt-1">Category is required</p>}
                     </fieldset>
 
-
-
                     {/* Deadline */}
-                    <fieldset className="fieldset  w-full">
-                        {/* <label className="dark:text-gray-100 label">Date</label>
-                        <input type="date" name='date' className="input w-full" placeholder="Date" /> */}
-                        <label className="dark:text-gray-100 label font-bold">
-                            <span className="label-text">Deadline</span>
-                        </label>
+                    <fieldset className='fieldset w-full p-0'>
+                        <label className="label font-semibold dark:text-gray-100">Deadline</label>
                         <DatePicker
-                            className="input dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
                     </fieldset>
 
                     {/* Budget */}
-                    <fieldset className="w-full">
-                        <label className="dark:text-gray-100 label font-semibold">Budget ($)</label>
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-100">Budget ($)</label>
                         <input
-                            type="text"
-                            name="budget"
-                            className="input dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
+                            type="number"
+                            {...register('budget', { required: true })}
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                             placeholder="E.g. 250"
                         />
+                        {errors.budget && <p className="text-red-500 text-sm mt-1">Budget is required</p>}
                     </fieldset>
 
                     {/* User Email */}
-                    <fieldset className="w-full">
-                        <label className="dark:text-gray-100 label font-semibold">User Email</label>
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-100">User Email</label>
                         <input
                             type="email"
-                            name="email"
                             value={user?.email}
                             disabled
-                            className="input dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
-                            placeholder="you@example.com"
-                            required
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
                     </fieldset>
 
                     {/* User Name */}
-                    <fieldset className="w-full">
-                        <label className="dark:text-gray-100 label font-semibold">User Name</label>
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-100">User Name</label>
                         <input
                             type="text"
-                            name="name"
                             value={user?.displayName}
                             disabled
-                            className="input dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
-                            placeholder="John Doe"
-                            required
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
                     </fieldset>
 
                     {/* Description */}
-                    <fieldset className="w-full col-span-2">
-                        <label className="dark:text-gray-100 label font-semibold">Description</label>
+                    <fieldset className="col-span-2">
+                        <label className="label font-semibold dark:text-gray-100">Description</label>
                         <textarea
-                            name="description"
-                            className="textarea dark:bg-gray-700 dark:text-gray-200 textarea-bordered w-full"
-                            placeholder="Brief description of the task..."
+                            {...register('description', { required: true })}
+                            className="textarea textarea-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                             rows={3}
+                            placeholder="Brief description of the task..."
+                        ></textarea>
+                        {errors.description && <p className="text-red-500 text-sm mt-1">Description is required</p>}
+                    </fieldset>
+
+                    {/* Image Upload */}
+                    <fieldset className="col-span-2">
+                        <label className="label font-semibold dark:text-gray-100">Task Image</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            {...register('image', { required: true })}
+                            className="file-input file-input-bordered w-full dark:bg-gray-700 dark:text-gray-200"
                         />
+                        {errors.image && <p className="text-red-500 text-sm mt-1">Image is required</p>}
                     </fieldset>
                 </div>
 
                 {/* Submit Button */}
-                <div className="mt-8 px-4">
+                <div className="mt-8">
                     <motion.input
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        disabled={isSubmitting}
                         type="submit"
-                        value="Add Task"
+                        value={isSubmitting ? "Submitting..." : "Add Task"}
                         className="w-full btn btn-info btn-outline text-lg"
                     />
                 </div>

@@ -26,8 +26,8 @@ const BrowserTask = () => {
         >
             {/* Section Title with Typewriter */}
             <Fade direction="up" cascade damping={0.1}>
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-3xl md:text-4xl font-bold text-indigo-700 dark:text-indigo-400">
+                <div className="md:flex justify-between items-center mb-6">
+                    <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-indigo-400">
                         <Typewriter
                             words={['Available Freelance Tasks', 'Browse and Bid Now']}
                             loop={true}
@@ -42,7 +42,7 @@ const BrowserTask = () => {
                     {/* Toggle View Button */}
                     <button
                         onClick={() => setViewType(viewType === 'table' ? 'card' : 'table')}
-                        className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition-all duration-300"
+                        className="flex items-center gap-2 btn btn-primary text-white px-4 py-2 rounded-lg shadow hover:btn-outline transition-all duration-300 mt-2 md:mt-0"
                     >
                         {viewType === 'table' ? <FaTh /> : <FaList />}
                         {viewType === 'table' ? 'Card View' : 'Table View'}
@@ -90,7 +90,7 @@ const BrowserTask = () => {
                                 <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
                                 <div className="mt-4">
-                                    <Link to={`/dashboard/browse-tasks/${task._id}`} className="btn btn-primary text-white px-4 py-2 rounded hover:bg-indigo-700">
+                                    <Link to={`/dashboard/browse-tasks/${task._id}`} className="btn btn-primary  btn-outline px-4 py-2 rounded hover:btn-outline">
                                         View / Bid
                                     </Link>
                                 </div>
