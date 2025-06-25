@@ -13,6 +13,7 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import ErrorPage from "../Error/ErrorPage";
 import PrivateRoutes from "../Provider/Private/PrivateRoutes";
 import UpdatedMyPost from "../Pages/Update/UpdatedMyPost";
+import DashBoardLayouts from "../Layouts/DashBoardLayouts/DashBoardLayouts";
 // import UserProfiles from "../Components/UserProfiles/UserProfiles";
 
 export const router = createBrowserRouter([
@@ -74,5 +75,11 @@ export const router = createBrowserRouter([
                 hydrateFallbackElement: <Fallback />
             },
         ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoutes>
+            <DashBoardLayouts />
+        </PrivateRoutes>
     }
 ])
