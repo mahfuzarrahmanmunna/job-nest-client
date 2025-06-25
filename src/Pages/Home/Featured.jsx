@@ -1,21 +1,44 @@
-import React from 'react';
-import { Fade } from 'react-awesome-reveal';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
+import { Link } from 'react-router';
 
 const Featured = ({ featured }) => {
-    return (
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
 
-        <Fade direction="down" cascade damping={0.1}>
-            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true); // Show the section when it enters the viewport
+                }
+            },
+            { threshold: 0.5 } // Trigger when 50% of the section is visible
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+
+    return (
+        <div ref={sectionRef}>
+            <div className={`grid md:grid-cols-3 gap-6 max-w-6xl mx-auto ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 {featured && featured.length > 0 ? (
                     featured.map(task => (
-                        <Fade direction="left" key={task._id}>
+                        <Link to={`/browse-tasks/${task._id}`} key={task._id}>
                             <motion.div
-                                className="bg-white dark:bg-neutral-600 p-6 rounded-2xl shadow-lg text-left border border-gray-200 dark:border-neutral-500 hover:shadow-xl transition lg:w-[356px] lg:h-[241px]  md:h-[296px]"
-                                whileHover={{ scale: 1.03 }}
+                                className="bg-white dark:bg-neutral-600 p-6 rounded-2xl shadow-lg text-left border border-gray-200 dark:border-neutral-500 hover:shadow-xl transition lg:w-[356px] lg:h-[241px] md:h-[296px]"
+                                whileHover={{ scale: 1.03, transition: { duration: 0.8 } }}
                             >
-                                <h3 className="text-xl font-bold md:text-base lg:text-xl md:text-sm text-primary dark:text-neutral-200 mb-2">
+                                <h3 className="text-xl font-bold md:text-base lg:text-xl sm:text-sm text-primary dark:text-neutral-200 mb-2">
                                     {task?.title.slice(0, 50)}...
                                 </h3>
                                 <h4 className="text-md font-semibold text-indigo-400 dark:text-gray-300 mb-2">{task?.category}</h4>
@@ -26,7 +49,7 @@ const Featured = ({ featured }) => {
                                     Deadline: {new Date(task?.formateDate).toLocaleDateString()}
                                 </p>
                             </motion.div>
-                        </Fade>
+                        </Link>
                     ))
                 ) : (
                     <div className="col-span-3 w-full">
@@ -47,8 +70,7 @@ const Featured = ({ featured }) => {
                     </div>
                 )}
             </div>
-        </Fade>
-
+        </div>
     );
 };
 

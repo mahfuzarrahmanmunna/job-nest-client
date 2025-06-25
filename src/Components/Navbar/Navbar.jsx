@@ -33,45 +33,10 @@ const Navbar = () => {
                 Home
             </NavLink>
         </li>
+       
         <li>
             <NavLink
-                to="/add-task"
-                className={({ isActive }) =>
-                    isActive
-                        ? "underline text-primary px-4 py-2 rounded font-semibold"
-                        : "text-gray-600 dark:text-white hover:text-blue-600 px-4 py-2"
-                }
-            >
-                Add Task
-            </NavLink>
-        </li>
-        <li>
-            <NavLink
-                to="/browse-tasks"
-                className={({ isActive }) =>
-                    isActive
-                        ? "underline text-primary px-4 py-2 rounded font-semibold"
-                        : "text-gray-600 dark:text-white hover:text-blue-600 px-4 py-2"
-                }
-            >
-                Browse All Task
-            </NavLink>
-        </li>
-        <li>
-            <NavLink
-                to="/my-posted-tasks"
-                className={({ isActive }) =>
-                    isActive
-                        ? "underline text-primary px-4 py-2 rounded font-semibold"
-                        : "text-gray-600 dark:text-white hover:text-blue-600 px-4 py-2"
-                }
-            >
-                My Posted Task
-            </NavLink>
-        </li>
-        <li>
-            <NavLink
-                to="/about"
+                to="/about-us"
                 className={({ isActive }) =>
                     isActive
                         ? "underline text-primary px-4 py-2 rounded font-semibold"
@@ -79,6 +44,18 @@ const Navbar = () => {
                 }
             >
                 About Us
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/terms"
+                className={({ isActive }) =>
+                    isActive
+                        ? "underline text-primary px-4 py-2 rounded font-semibold"
+                        : "text-gray-600 dark:text-white hover:text-blue-600 px-4 py-2"
+                }
+            >
+                Terms & Condition
             </NavLink>
         </li>
         {user && (
