@@ -5,6 +5,12 @@ A professional freelance task marketplace connecting clients with freelancers fo
 
 ---
 
+## 🧾 Description
+
+**Freelancing Task Marketplace** is a modern web application that connects clients with freelancers to accomplish short-term tasks and project-based work. The platform allows clients to post jobs, set deadlines, and receive bids from freelancers. Freelancers can browse tasks, apply with bids, and manage their submissions. Built with a powerful **MERN stack** (React, Node.js, Express, MongoDB) and styled using **Tailwind CSS + DaisyUI**, this project features smooth animations, real-time updates, and a fully responsive design — ideal for showcasing practical skills in task management, user roles, and deadline-driven workflows.
+
+---
+
 ## 🌐 Live Site
 
 [🔗 Visit Live Website](https://jobnest-a10.web.app/)
