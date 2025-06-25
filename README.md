@@ -3,6 +3,8 @@
 
 A professional freelance task marketplace connecting clients with freelancers for short-term tasks, project bids, and more.
 
+---
+
 ## 🌐 Live Site
 
 [🔗 Visit Live Website](https://jobnest-a10.web.app/)
@@ -29,7 +31,7 @@ A professional freelance task marketplace connecting clients with freelancers fo
 ### Frontend
 
 - React
-- React Router DOM
+- React Router 
 - Firebase Auth
 - Axios
 - Tailwind CSS
@@ -73,22 +75,6 @@ A professional freelance task marketplace connecting clients with freelancers fo
 | `react-hook-form`    | Form state management                          |
 | `zod` or `yup`       | Schema validation for forms (optional)         |
 
-### Backend Packages
-
-| Package         | Purpose                                     |
-|------------------|---------------------------------------------|
-| `express`        | Web server framework                        |
-| `cors`           | Cross-origin requests                       |
-| `dotenv`         | Environment variable support                |
-| `mongodb`        | MongoDB driver                              |
-| `nodemon`        | Auto-restart server during development      |
-| `body-parser`    | Parses incoming requests                    |
-| `helmet`         | Secure HTTP headers                         |
-| `morgan`         | Logs HTTP requests                          |
-| `cookie-parser`  | Handles cookies                             |
-| `bcryptjs`       | Password hashing (if manual auth)           |
-| `jsonwebtoken`   | Auth token handling (if not using Firebase) |
-
 ---
 
 ## ⚙️ Local Setup Instructions
@@ -98,7 +84,72 @@ A professional freelance task marketplace connecting clients with freelancers fo
 - Node.js installed
 - MongoDB (local or cloud)
 - Firebase project set up
+- Backend API server (see below)
 
-### 1. Clone the repo
+### 1. Clone the Repository
 
 ```bash
+git clone https://github.com/mahfuzarrahmanmunna/freelancing-task-frontend.git
+cd freelancing-task-frontend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Add `.env` File
+
+```env
+VITE_API_URL=http://localhost:3000
+VITE_FIREBASE_API_KEY=your_firebase_key
+# Add other required Firebase configs here
+```
+
+### 4. Start the Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧪 Backend API Endpoints (Express + MongoDB)
+
+Your frontend communicates with these endpoints via `VITE_API_URL`:
+
+### 🔐 `/users` Endpoints
+
+| Method | Route        | Description                     |
+|--------|--------------|---------------------------------|
+| GET    | `/users`     | Get all users                   |
+| POST   | `/users`     | Add a new user                  |
+| PATCH  | `/users`     | Update user login time          |
+
+### 📋 `/tasks-nest` Endpoints
+
+| Method | Route                 | Description                             |
+|--------|-----------------------|-----------------------------------------|
+| GET    | `/tasks-nest`         | Get all tasks                           |
+| GET    | `/tasks-nest/sorted`  | Get latest 6 tasks                      |
+| GET    | `/tasks-nest/:id`     | Get task by ID                          |
+| POST   | `/tasks-nest`         | Add a new task                          |
+| PUT    | `/tasks-nest/:id`     | Update entire task                      |
+| PATCH  | `/tasks-nest/:id`     | Update bids field only                  |
+| DELETE | `/tasks-nest/:id`     | Delete a task                           |
+
+> Make sure your backend is running on `http://localhost:3000` or update `VITE_API_URL` in `.env`.
+
+---
+
+## 🤝 Author
+
+- **Md. Mahfuzar Rahman Munna**  
+- GitHub: [@mahfuzarrahmanmunna](https://github.com/mahfuzarrahmanmunna)
+- Email: mdmahfuzarrahmanmunna44@gmail.com
+- [LinkedIn Profile](https://www.linkedin.com/in/md-mahfuzar-rahman-munna-41a342351/)
+
+---
+
+> ✨ If this project helped you, give it a ⭐ on GitHub!
