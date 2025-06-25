@@ -81,6 +81,17 @@ const Navbar = () => {
                 About Us
             </NavLink>
         </li>
+        {user && (
+            <li>
+                <NavLink to='/dashboard' className={({ isActive }) =>
+                    isActive
+                        ? "underline text-primary px-4 py-2 rounded font-semibold"
+                        : "text-gray-600 dark:text-white hover:text-blue-600 px-4 py-2"
+                }>
+                    Dashboard
+                </NavLink>
+            </li>
+        )}
     </>;
 
     return (

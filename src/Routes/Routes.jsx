@@ -55,6 +55,10 @@ export const router = createBrowserRouter([
                 Component: SignIn
             },
             {
+                path: "/about-us",
+                Component: SignIn
+            },
+            {
                 path: "/browse-tasks/:id",
                 element: <PrivateRoutes><TaskDetails /></PrivateRoutes>,
                 loader: ({ params }) => fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${params.id}`),
