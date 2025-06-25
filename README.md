@@ -89,7 +89,7 @@ A professional freelance task marketplace connecting clients with freelancers fo
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/mahfuzarrahmanmunna/freelancing-task-frontend.git
+git clone https://github.com/mahfuzarrahmanmunna/job-nest-client.git
 cd freelancing-task-frontend
 ```
 
