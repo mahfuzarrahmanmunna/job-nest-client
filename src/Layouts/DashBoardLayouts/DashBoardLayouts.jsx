@@ -1,12 +1,27 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { LayoutDashboard } from 'lucide-react';
 import { BiLeftArrow, BiLogOut } from 'react-icons/bi';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { Outlet, NavLink, Link } from 'react-router'; // ✅ use react-router-dom not react-router
 import { BsPersonFillExclamation } from 'react-icons/bs';
+import { AuthContext } from '../../Context/AuthContext';
+import Swal from 'sweetalert2';
 
 const DashBoardLayouts = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { user, logOutUser } = use(AuthContext)
+
+    const handleLogOutUser = () => {
+        logOutUser().then(() => {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Log Out successful!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+    };
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -60,7 +75,7 @@ const DashBoardLayouts = () => {
                     </NavLink>
                     <ul className="space-y-4 font-medium">
                         <li>
-                            <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                            <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "text-primary underline btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
                                 Browse All Task
                             </NavLink>
                         </li>
@@ -80,14 +95,14 @@ const DashBoardLayouts = () => {
                 {/* Bottom Section - Profile and Logout */}
                 <div className="mt-6 border-t flex flex-col  border-indigo-300 dark:border-indigo-700 pt-4">
                     <div className="mb-3 text-sm text-gray-600 dark:text-gray-300">
-                        Logged in as <span className="font-semibold">Munna</span>
+                        Logged in as <span className="font-semibold">{user?.displayName.slice(0, 10)}...</span>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <Link to="/dashboard/my-profile" className="text-sm text-blue-600 hover:underline dark:text-blue-400 flex btn btn-block">
+                        <Link to="/dashboard/my-profile" className="text-sm text-primary hover:underline dark:text-blue-400 flex btn btn-block">
                             <BsPersonFillExclamation /> Profile
                         </Link>
                         <button
-                            onClick={() => console.log('Logout')} // replace with actual logout logic
+                            onClick={handleLogOutUser} // replace with actual logout logic
                             className="text-sm flex items-center gap-2 btn text-red-600 hover:underline dark:text-red-400"
                         >
                             <BiLogOut /> Logout

@@ -202,7 +202,7 @@ const AddTask = () => {
                 {/* Submit Button */}
                 <div className="mt-8">
                     <motion.input
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.005 }}
                         whileTap={{ scale: 0.95 }}
                         disabled={isSubmitting}
                         type="submit"
