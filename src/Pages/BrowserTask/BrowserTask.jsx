@@ -18,7 +18,7 @@ const BrowserTask = () => {
     const pathname = location.pathname;
 
     const marginClass = pathname === '/browse-tasks' ? 'px-4 md:px-12 my-12' : '';
-    const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
+    const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-3';
 
     if (!tasks) return <Fallback />;
 
@@ -92,7 +92,7 @@ const BrowserTask = () => {
                         {tasks.map((task, index) => (
                             <div
                                 key={index}
-                                className="bg-white dark:bg-gray-800 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden"
+                                className="bg-white dark:bg-gray-700  border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden"
                             >
                                 {/* Image */}
                                 {task.image && (
@@ -105,7 +105,7 @@ const BrowserTask = () => {
                                 {/* Content */}
                                 <div className="p-4">
                                     <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
-                                        {task.title.slice(0, 30)}...
+                                        {task.title.slice(0, 25)}...
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">

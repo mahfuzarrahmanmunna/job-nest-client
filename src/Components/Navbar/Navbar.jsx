@@ -49,7 +49,7 @@ const Navbar = () => {
         <div className="navbar sticky top-0 z-50 px-4 md:px-12 bg-gray-200 dark:bg-gray-800">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden  dark:bg-gray-800">
+                    <label tabIndex={0} className="btn btn-ghost p-0 lg:hidden  dark:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
