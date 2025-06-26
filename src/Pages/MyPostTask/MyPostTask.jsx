@@ -47,7 +47,7 @@ const MyPostTask = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/tasks-nest/${id}`, {
+                fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

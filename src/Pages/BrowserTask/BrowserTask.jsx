@@ -29,7 +29,7 @@ const BrowserTask = () => {
     // Fetch tasks with sorting
     const fetchSortedTasks = async (order = 'desc') => {
         try {
-            const res = await fetch(`http://localhost:3000/tasks-nest/sort?order=${order}&sortBy=formateDate`);
+            const res = await fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/sort?order=${order}&sortBy=formateDate`);
             const data = await res.json();
             setTasks(data);
         } catch (err) {
@@ -49,7 +49,7 @@ const BrowserTask = () => {
             {/* Section Title */}
             <Fade direction="up" cascade damping={0.1}>
                 <div className="md:flex justify-between items-center mb-6">
-                    <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-indigo-400">
+                    <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-primary">
                         <Typewriter
                             words={['Available Freelance Tasks', 'Browse and Bid Now']}
                             loop={true}

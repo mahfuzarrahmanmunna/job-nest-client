@@ -10,7 +10,7 @@ const stats = [
 
 const PlatformStats = () => {
     return (
-        <section className="px-4 md:px-12">
+        <section>
             <h2 className="text-3xl font-bold text-primary dark:text-white mb-10 text-center">Platform in Numbers</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 {stats.map((stat, i) => (

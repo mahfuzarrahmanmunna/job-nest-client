@@ -46,7 +46,7 @@ const TaskDetails = () => {
         const newBids = bidsCount + 1;
 
         // data patch here
-        fetch(`http://localhost:3000/tasks-nest/${task._id}`, {
+        fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${task._id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json',

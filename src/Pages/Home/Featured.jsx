@@ -38,7 +38,7 @@ const Featured = ({ featured }) => {
             <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 {sortedTasks.length > 0 ? (
                     sortedTasks.map(task => (
-                        <Link to={`/browse-tasks/${task._id}`} key={task._id}>
+                        <Link to={`/dashboard/browse-tasks/${task._id}`} key={task._id}>
                             <motion.div
                                 className="group bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300"
                                 whileHover={{ scale: 1.02 }}

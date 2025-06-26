@@ -31,7 +31,7 @@ const Sidebar = () => {
     return (
         <div>
             {/* Mobile Navbar */}
-            <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-base-100 shadow sticky top-0 z-50 dark:bg-gray-900">
+            <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-base-100 shadow sticky top-0 z-50 dark:bg-gray-700">
                 <Link to="/" className="flex items-center gap-2 text-base-content">
                     <BiLeftArrow />
                     <span className="font-bold dark:text-white">Home</span>

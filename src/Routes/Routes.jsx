@@ -33,14 +33,14 @@ export const router = createBrowserRouter([
                 path: '/',
                 Component: Home,
                 loader: () =>
-                    fetch('http://localhost:3000/tasks-nest/sorted'),
+                    fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/sorted'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
                 path: 'browse-tasks',
                 Component: BrowserTask,
                 loader: () =>
-                    fetch('http://localhost:3000/tasks-nest'),
+                    fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
+                    fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -112,7 +112,7 @@ export const router = createBrowserRouter([
                 path: 'browse-tasks',
                 Component: BrowserTask,
                 loader: () =>
-                    fetch('http://localhost:3000/tasks-nest'),
+                    fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -123,7 +123,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
+                    fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -134,7 +134,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: () =>
-                    fetch('http://localhost:3000/tasks-nest'),
+                    fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -145,7 +145,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
+                    fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -156,7 +156,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
+                    fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {

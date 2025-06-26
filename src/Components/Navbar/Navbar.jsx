@@ -49,7 +49,7 @@ const Navbar = () => {
         <div className="navbar sticky top-0 z-50 px-4 md:px-12 bg-gray-200 dark:bg-gray-900">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost p-0 lg:hidden  dark:bg-gray-800">
+                    <label tabIndex={0} className="btn btn-ghost p-0 lg:hidden dark:text-base-100">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -61,7 +61,7 @@ const Navbar = () => {
 
                 <figure>
                     <Link to="/" className=" items-center  hidden md:flex">
-                        <img src="https://i.ibb.co/0ytx8RG4/job-nest-freelance-web-site-logo-job.png" className="w-24 md:w-32 rounded dark:bg-gray-900 " alt="Logo" />
+                        <img src="https://i.ibb.co/gbLmgf6Y/job-nest-freelance-web-site-logo-job-web-app.png" className="w-24 md:w-32 rounded dark:bg-gray-900 " alt="Logo" />
                     </Link>
                 </figure>
 

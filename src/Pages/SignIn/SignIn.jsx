@@ -29,7 +29,7 @@ const SignIn = () => {
             };
 
             // Send user data to database
-            const res = await fetch('http://localhost:3000/users', {
+            const res = await fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/users', {
                 method: 'PATCH', // You can use PUT if your backend is updated for that
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const SignIn = () => {
             toast.error("Google Sign-in Failed");
         }
     };
-    
+
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -75,7 +75,7 @@ const SignIn = () => {
             };
 
             // Save/update user to database
-            const res = await fetch('http://localhost:3000/users', {
+            const res = await fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/users', {
                 method: 'PATCH', // or use PUT/POST if your backend requires it
                 headers: {
                     'Content-Type': 'application/json'

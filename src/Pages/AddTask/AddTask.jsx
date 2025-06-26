@@ -50,7 +50,7 @@ const AddTask = () => {
                     bids
                 };
 
-                const res = await fetch('http://localhost:3000/tasks-nest', {
+                const res = await fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

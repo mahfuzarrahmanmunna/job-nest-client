@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "apps-store-a9"
-  }
+    "default": "apps-store-a9",
+    "prod": "jobnest-a10"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -10,7 +10,7 @@ const HighestBidTasks = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:3000/tasks-nest/highest-bid')
+        fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/highest-bid')
             .then(res => res.json())
             .then(data => {
                 setTasks(data);

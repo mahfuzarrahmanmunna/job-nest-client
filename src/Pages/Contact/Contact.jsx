@@ -6,7 +6,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/f
 
 const Contact = () => {
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 px-4 md:px-16">
+        <div className="min-h-screen py-16 px-4 md:px-16">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}

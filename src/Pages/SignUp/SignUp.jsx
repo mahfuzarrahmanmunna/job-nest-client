@@ -80,7 +80,7 @@ const SignUp = () => {
                     creationTime: user?.metadata?.creationTime,
                     lastSignInTime: user?.metadata?.lastSignInTime,
                 }
-                fetch('http://localhost:3000/users', {
+                fetch('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

@@ -83,7 +83,7 @@ const UpdatedMyPost = () => {
             name: user?.displayName
         };
 
-        fetch(`http://localhost:3000/tasks-nest/${_id}`, {
+        fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -22,7 +22,7 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="px-4 md:px-12">
+        <section className="">
             <h2 className="text-3xl font-bold text-primary dark:text-white mb-10 text-center">How It Works</h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {steps.map((step, index) => (

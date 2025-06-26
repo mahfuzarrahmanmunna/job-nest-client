@@ -6,12 +6,12 @@ import { Link } from 'react-router';
 const Footer = () => {
     return (
         <footer className="bg-base-300 dark:bg-gray-900 text-base-content dark:text-gray-300 py-10 border-t border-gray-300 dark:border-gray-700">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-10">
+            <div className="px-4 md:px-12 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-10">
 
                 {/* Logo & Name */}
                 <div>
                     <div className="flex items-center space-x-3">
-                        <img src="https://i.ibb.co/0ytx8RG4/job-nest-freelance-web-site-logo-job.png" alt="Logo" className="w-14 h-10 rounded-xl" />
+                        <img src="https://i.ibb.co/gbLmgf6Y/job-nest-freelance-web-site-logo-job-web-app.png" alt="Logo" className="w-16 h-10 rounded-xl" />
                         <span className="text-2xl font-bold text-primary">Job Nest</span>
                     </div>
                     <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">

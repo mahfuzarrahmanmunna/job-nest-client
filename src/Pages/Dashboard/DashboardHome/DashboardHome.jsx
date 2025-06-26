@@ -13,7 +13,7 @@ const DashboardHome = () => {
     const [totalUsers, setTotalUsers] = useState(0);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/tasks-nest')
+        axios.get('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest')
             .then(res => {
                 setTotalTasks(res.data.length);
                 const userTasks = res.data.filter(task => task.email === user?.email);
@@ -21,7 +21,7 @@ const DashboardHome = () => {
             })
             .catch(err => console.error(err));
 
-        axios.get('http://localhost:3000/users')
+        axios.get('https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/users')
             .then(res => setTotalUsers(res.data.length))
             .catch(err => console.error(err));
     }, [user?.email]);
