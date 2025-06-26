@@ -133,7 +133,7 @@ const BrowserTask = () => {
                                 fraction={0.5}
                             >
                                 <div
-                                    className="bg-white dark:bg-gray-700 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden group"
+                                    className="bg-white dark:bg-gray-900 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden group"
                                 >
                                     {task.image && (
                                         <img
