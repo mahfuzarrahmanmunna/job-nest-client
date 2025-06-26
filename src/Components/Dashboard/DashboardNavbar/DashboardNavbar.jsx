@@ -9,7 +9,7 @@ import { AuthContext } from '../../../Context/AuthContext';
 const DashboardNavbar = () => {
     const { user } = use(AuthContext)
     return (
-        <div className="flex items-center justify-between px-6 py-4 bg-base-100 dark:bg-gray-700 border-b border-base-300 lg:static sticky top-0 z-40">
+        <div className="flex items-center justify-between px-6 py-4 bg-base-100 dark:bg-gray-900 border-b border-base-300 lg:static sticky top-0 z-40">
             {/* Left section: Logo or Title */}
             <h1 className="text-xl font-semibold text-base-content dark:text-white">Dashboard</h1>
 

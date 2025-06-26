@@ -43,7 +43,7 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside
-                className={`bg-base-200 dark:bg-gray-800 p-6 w-64 transition-all duration-300 z-50 lg:block ${sidebarOpen ? 'block' : 'hidden'
+                className={`bg-base-300 dark:bg-gray-900 p-6 w-64 transition-all duration-300 z-50 lg:block ${sidebarOpen ? 'block' : 'hidden'
                     } fixed lg:static top-0 left-0 h-screen flex flex-col justify-between`}
             >
                 {/* Top Section */}
@@ -55,10 +55,10 @@ const Sidebar = () => {
                         </button>
                     </div>
 
-                    <Link to="/" className="flex items-center mb-6">
-                        <BiLeftArrow className="text-base-content" />
+                    <Link to="/" className="flex items-center text-primary mb-6 border-b">
+                        <BiLeftArrow className="" />
                         <img
-                            src="https://i.ibb.co/4gFKt7dG/Chat-GPT-Image-Jun-25-2025-10-13-36-PMcopy.png"
+                            src="https://i.ibb.co/0ytx8RG4/job-nest-freelance-web-site-logo-job.png"
                             alt="Logo"
                             className="ml-2 w-24"
                         />

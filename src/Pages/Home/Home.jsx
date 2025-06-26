@@ -29,7 +29,7 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen text-center bg-indigo-50 dark:bg-neutral-900">
+        <div className="min-h-screen text-center">
             {/* Hero Section */}
             <HeroSection />
 

@@ -4,7 +4,7 @@ import { FaQuestionCircle, FaInfoCircle, FaBug, FaHeadset } from 'react-icons/fa
 
 const Support = () => {
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 md:px-12 py-16 ">
+        <div className="min-h-screen  px-4 md:px-12 py-16 ">
             {/* Page Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}

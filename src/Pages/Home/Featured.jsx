@@ -9,6 +9,7 @@ const Featured = ({ featured }) => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
     const { loading } = use(AuthContext)
+    console.log(featured);
 
     // Sort by latest createdAt date
     const sortedTasks = [...(featured || [])].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -39,7 +40,7 @@ const Featured = ({ featured }) => {
                     sortedTasks.map(task => (
                         <Link to={`/browse-tasks/${task._id}`} key={task._id}>
                             <motion.div
-                                className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300"
+                                className="group bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300"
                                 whileHover={{ scale: 1.02 }}
                             >
                                 {/* Image */}

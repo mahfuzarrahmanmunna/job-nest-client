@@ -11,7 +11,7 @@ const Footer = () => {
                 {/* Logo & Name */}
                 <div>
                     <div className="flex items-center space-x-3">
-                        <img src="https://i.ibb.co/9m2jSpnz/original-c3336e32daef82f3fe80048ef73b45a9.jpg" alt="Logo" className="w-14 h-10 rounded-xl" />
+                        <img src="https://i.ibb.co/0ytx8RG4/job-nest-freelance-web-site-logo-job.png" alt="Logo" className="w-14 h-10 rounded-xl" />
                         <span className="text-2xl font-bold text-primary">Job Nest</span>
                     </div>
                     <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">

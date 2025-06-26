@@ -23,7 +23,7 @@ const BrowserTask = () => {
     const location = useLocation();
     const pathname = location.pathname;
 
-    const marginClass = pathname === '/browse-tasks' ? 'px-4 md:px-12 my-12' : '';
+    const marginClass = pathname === '/browse-tasks' ? 'px-4 md:px-12 py-12' : '';
     const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-3';
 
     // Fetch tasks with sorting

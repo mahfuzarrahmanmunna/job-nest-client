@@ -4,7 +4,7 @@ import DashboardNavbar from '../../Components/Dashboard/DashboardNavbar/Dashboar
 
 const DashBoardLayouts = () => {
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen bg-base-100 dark:bg-gray-900">
+        <div className="flex flex-col lg:flex-row min-h-screen bg-base-200 dark:bg-gray-800">
             <Sidebar />
             <div className="flex-1 flex flex-col">
                 <DashboardNavbar /> {/* 👈 Add this line */}

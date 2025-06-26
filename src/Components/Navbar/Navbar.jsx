@@ -46,7 +46,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="navbar sticky top-0 z-50 px-4 md:px-12 bg-gray-200 dark:bg-gray-800">
+        <div className="navbar sticky top-0 z-50 px-4 md:px-12 bg-gray-200 dark:bg-gray-900">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost p-0 lg:hidden  dark:bg-gray-800">
@@ -60,8 +60,8 @@ const Navbar = () => {
                 </div>
 
                 <figure>
-                    <Link to="/" className=" items-center gap-2 hidden md:flex ">
-                        <img src="https://i.ibb.co/4gFKt7dG/Chat-GPT-Image-Jun-25-2025-10-13-36-PMcopy.png" className="w-24 md:w-32 rounded dark:bg-gray-900 " alt="Logo" />
+                    <Link to="/" className=" items-center  hidden md:flex">
+                        <img src="https://i.ibb.co/0ytx8RG4/job-nest-freelance-web-site-logo-job.png" className="w-24 md:w-32 rounded dark:bg-gray-900 " alt="Logo" />
                     </Link>
                 </figure>
 
