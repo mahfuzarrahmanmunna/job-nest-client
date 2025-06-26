@@ -27,10 +27,13 @@ const BrowserTask = () => {
     const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-3';
 
     // Fetch tasks with sorting
-    const fetchSortedTasks = async (order = 'desc') => {
+    const fetchSortedTasks = async (order = 'asc') => {
         try {
-            const res = await fetch(`https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/sort?order=${order}&sortBy=formateDate`);
+            const res = await fetch(
+                `https://b11a10-server-side-mahfuzarrahmanmu.vercel.app/tasks-nest/sort?order=${order}&sortBy=formateDate`
+            );
             const data = await res.json();
+            console.log('Sorted tasks:', data); // For debugging
             setTasks(data);
         } catch (err) {
             console.error('Error fetching sorted tasks:', err);
