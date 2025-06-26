@@ -61,7 +61,7 @@ const Navbar = () => {
 
                 <figure>
                     <Link to="/" className=" items-center  hidden md:flex">
-                        <img src="https://i.ibb.co/gbLmgf6Y/job-nest-freelance-web-site-logo-job-web-app.png" className="w-24 md:w-32 rounded dark:bg-gray-900 " alt="Logo" />
+                        <img src="https://i.ibb.co/gbLmgf6Y/job-nest-freelance-web-site-logo-job-web-app.png" className="w-24 rounded dark:bg-gray-900 " alt="Logo" />
                     </Link>
                 </figure>
 

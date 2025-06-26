@@ -68,10 +68,10 @@ const BrowserTask = () => {
                         {/* Sort Select */}
                         <select
                             onChange={(e) => fetchSortedTasks(e.target.value)}
-                            className="select select-bordered text-sm px-8 py-2 rounded"
+                            className="select select-bordered text-sm btn btn-primary btn-outline hover:text-gray-700 px-8 py-2 rounded"
                         >
-                            <option value="desc">Newest First</option>
-                            <option value="asc">Oldest First</option>
+                            <option className='text-primary' value="desc">Newest First</option>
+                            <option className='text-primary' value="asc">Oldest First</option>
                         </select>
 
                         {/* View Toggle Button */}
@@ -148,9 +148,9 @@ const BrowserTask = () => {
 
                                     <div className="p-4">
                                         <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
-                                            {task.title.slice(0, 25)}...
+                                            {task.title.slice(0, 20)}...
                                         </h3>
-                                        <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
+                                        <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name.slice(0, 20)}...</p>
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
                                         <div className="mt-4">
                                             <Link

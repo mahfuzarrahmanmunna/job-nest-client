@@ -107,7 +107,7 @@ const Home = () => {
                 </section>
 
                 {/* Our Mission */}
-                <section className="bg-white dark:bg-gradient-to-b from-neutral-800 to-neutral-800 rounded-xl py-12">
+                <section className="bg-white dark:bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl py-12">
                     <div className="max-w-4xl mx-auto text-center">
                         <h2 className="text-3xl font-bold text-primary dark:text-white mb-4">Our Mission</h2>
                         <p className="text-gray-600 dark:text-gray-100 text-lg">

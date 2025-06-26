@@ -13,7 +13,7 @@ const WhyChose = () => {
                 <Fade>
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="bg-indigo-50 p-6 dark:bg-neutral-400 md:h-[272px] rounded-xl shadow text-center"
+                        className="bg-indigo-50 p-6 dark:bg-gray-700 md:h-[272px] rounded-xl shadow text-center"
                     >
                         <div className="text-5xl mb-4 flex justify-center">
                             <img className='w-12' src="https://i.ibb.co/XZY3YgJ1/2345130.png" alt="" />
@@ -26,7 +26,7 @@ const WhyChose = () => {
                 <Fade>
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="bg-indigo-50 p-6 dark:bg-neutral-400 md:h-[272px] rounded-xl shadow text-center"
+                        className="bg-indigo-50 p-6 dark:bg-gray-700 md:h-[272px] rounded-xl shadow text-center"
                     >
                         <div className="text-5xl mb-4 flex justify-center">
                             <img className='w-12' src="https://i.ibb.co/s9FScT5k/pngtree-lightning-electric-icon-png-image-6486818.png" alt="" />
@@ -39,7 +39,7 @@ const WhyChose = () => {
                 <Fade>
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="bg-indigo-50 p-6 dark:bg-neutral-400 md:h-[272px] rounded-xl shadow text-center"
+                        className="bg-indigo-50 p-6 dark:bg-gray-700 md:h-[272px] rounded-xl shadow text-center"
                     >
                         <div className="text-5xl mb-4 flex justify-center">
                             <img src="https://i.ibb.co/nsH9G1CS/1803612.png" className='w-12' alt="" />
