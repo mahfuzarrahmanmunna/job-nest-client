@@ -43,8 +43,11 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside
-                className={`bg-base-300 dark:bg-gray-900 p-6 w-64 transition-all duration-300 z-50 lg:block ${sidebarOpen ? 'block' : 'hidden'
-                    } fixed lg:static top-0 left-0 h-screen flex flex-col justify-between`}
+                className={`bg-base-300 dark:bg-gray-900 w-64 p-6 
+                    fixed top-0 left-0 h-screen z-50 
+                    transform transition-transform duration-300 flex flex-col justify-between
+                    ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+                    lg:translate-x-0 static lg:sticky lg:top-0 lg:block`}
             >
                 {/* Top Section */}
                 <div>
@@ -129,7 +132,7 @@ const Sidebar = () => {
                             </span>
                         </div>
 
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 ">
                             <NavLink
                                 to="/dashboard/my-profile"
                                 className={({ isActive }) =>
