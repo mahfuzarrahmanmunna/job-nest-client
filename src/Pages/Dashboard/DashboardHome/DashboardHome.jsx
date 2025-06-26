@@ -13,7 +13,7 @@ const DashboardHome = () => {
     const [totalUsers, setTotalUsers] = useState(0);
 
     useEffect(() => {
-        axios.get('https://freelance-task-marketplace-server.vercel.app/tasks-nest')
+        axios.get('http://localhost:3000/tasks-nest')
             .then(res => {
                 setTotalTasks(res.data.length);
                 const userTasks = res.data.filter(task => task.email === user?.email);
@@ -21,7 +21,7 @@ const DashboardHome = () => {
             })
             .catch(err => console.error(err));
 
-        axios.get('https://freelance-task-marketplace-server.vercel.app/users')
+        axios.get('http://localhost:3000/users')
             .then(res => setTotalUsers(res.data.length))
             .catch(err => console.error(err));
     }, [user?.email]);

@@ -32,46 +32,59 @@ const SignIn = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const handleSignin = (e) => {
-        e.preventDefault()
+    const handleSignin = async (e) => {
+        e.preventDefault();
+
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        // signin here
-        signInPass(email, password)
-            .then(result => {
-                const user = result.user;
-                navigate(`${location.state ? location.state : '/'}`);
-                console.log(user);
-                const signInInfo = {
-                    email,
-                    lastSignInTime: user?.metadata?.lastSignInTime
-                }
-                fetch('https://freelance-task-marketplace-server.vercel.app/users', {
-                    method: 'PATCH',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(signInInfo)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log('after updated data', data);
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Sign in successful",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    })
-            })
-            .catch(error => {
-                const code = error.code;
-                console.log(code);
-            })
-    }
+        try {
+            // Sign in with email & password
+            const result = await signInPass(email, password);
+            const user = result.user;
+
+            // Prepare user data
+            const signInInfo = {
+                uid: user?.uid,
+                email: user?.email,
+                displayName: user?.displayName,
+                photoURL: user?.photoURL,
+                lastSignInTime: user?.metadata?.lastSignInTime
+            };
+
+            // Save/update user to database
+            const res = await fetch('http://localhost:3000/users', {
+                method: 'POST', // or use PUT/POST if your backend requires it
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(signInInfo)
+            });
+
+            const data = await res.json();
+            console.log('Server response:', data);
+
+            // Navigate after success
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Sign in successful",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            navigate(location.state || '/');
+        } catch (error) {
+            console.error("Sign in failed:", error.code);
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: error.message
+            });
+        }
+    };
+
 
     return (
         <div className="py-12 flex items-center justify-center  lg:px-12 px-4">

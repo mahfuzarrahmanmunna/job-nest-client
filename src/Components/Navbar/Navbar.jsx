@@ -77,9 +77,7 @@ const Navbar = () => {
                 <ThemeSwitch />
                 {user ? (
                     <>
-                        <button onClick={handleLogOutUser} className="btn btn-primary btn-sm lg:btn-md">
-                            <LogOut className="mr-1" size={18} /> Logout
-                        </button>
+
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
@@ -87,9 +85,9 @@ const Navbar = () => {
                                 </div>
                             </label>
                             <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 dark:bg-gray-700 rounded-box w-52">
-                                <li><span className="font-bold">{user.displayName}</span></li>
-                                <li><span className="text-xs break-all">{user.email}</span></li>
-                                <li><button onClick={handleLogOutUser}><LogOut className="mr-2" size={18} /> Logout</button></li>
+                                <li><span className="font-bold dark:text-base-100">{user.displayName}</span></li>
+                                <li><span className="text-xs break-all dark:text-base-100">{user.email}</span></li>
+                                <li><button onClick={handleLogOutUser} className='dark:text-base-100'><LogOut className="mr-2 " size={18} /> Logout</button></li>
                             </ul>
                         </div>
                     </>

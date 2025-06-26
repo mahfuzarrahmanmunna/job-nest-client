@@ -27,7 +27,7 @@ const MyPostTask = () => {
         }
     }, [data, user]);
 
-    
+
     if (!data) {
         return <Fallback />
     }
@@ -47,7 +47,7 @@ const MyPostTask = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${id}`, {
+                fetch(`http://localhost:3000/tasks-nest/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

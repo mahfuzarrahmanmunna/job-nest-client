@@ -80,7 +80,7 @@ const SignUp = () => {
                     creationTime: user?.metadata?.creationTime,
                     lastSignInTime: user?.metadata?.lastSignInTime,
                 }
-                fetch('https://freelance-task-marketplace-server.vercel.app/users', {
+                fetch('http://localhost:3000/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

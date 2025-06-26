@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
                 path: '/',
                 Component: Home,
                 loader: () =>
-                    fetch('https://freelance-task-marketplace-server.vercel.app/tasks-nest/sorted'),
+                    fetch('http://localhost:3000/tasks-nest/sorted'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
                 path: 'browse-tasks',
                 Component: BrowserTask,
                 loader: () =>
-                    fetch('https://freelance-task-marketplace-server.vercel.app/tasks-nest'),
+                    fetch('http://localhost:3000/tasks-nest'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -105,7 +105,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${params.id}`),
+                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: () =>
-                    fetch('https://freelance-task-marketplace-server.vercel.app/tasks-nest'),
+                    fetch('http://localhost:3000/tasks-nest'),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -127,7 +127,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${params.id}`),
+                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {
@@ -138,7 +138,7 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${params.id}`),
+                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
                 hydrateFallbackElement: <Fallback />,
             },
             {

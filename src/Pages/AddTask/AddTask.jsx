@@ -50,7 +50,7 @@ const AddTask = () => {
                     bids
                 };
 
-                const res = await fetch('https://freelance-task-marketplace-server.vercel.app/tasks-nest', {
+                const res = await fetch('http://localhost:3000/tasks-nest', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

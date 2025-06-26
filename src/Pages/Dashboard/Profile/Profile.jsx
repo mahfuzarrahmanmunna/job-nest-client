@@ -101,7 +101,7 @@ const Profile = () => {
                             type="file"
                             {...register('image')}
                             accept="image/*"
-                            className="w-full"
+                            className="w-full text-gray-400"
                         />
                     </div>
 

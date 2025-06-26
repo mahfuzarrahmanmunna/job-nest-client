@@ -83,7 +83,7 @@ const UpdatedMyPost = () => {
             name: user?.displayName
         };
 
-        fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${_id}`, {
+        fetch(`http://localhost:3000/tasks-nest/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
