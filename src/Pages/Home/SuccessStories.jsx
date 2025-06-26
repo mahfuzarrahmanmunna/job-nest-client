@@ -1,14 +1,21 @@
 // SuccessStories.js
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
+import Fallback from '../../Components/Fallback/Fallback';
 
 const SuccessStories = () => {
     const [testimonials, setTestimonials] = useState([]);
+    const { loading } = use(AuthContext)
 
     useEffect(() => {
         fetch('/testimonials.json')
             .then(res => res.json())
             .then(data => setTestimonials(data))
     }, [])
+
+    if (loading) {
+        return <Fallback />
+    }
 
     return (
         <section className="py-16 bg-indigo-50 dark:bg-neutral-800 px-4 md:px-12">
