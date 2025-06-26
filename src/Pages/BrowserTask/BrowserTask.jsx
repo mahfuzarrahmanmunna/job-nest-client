@@ -14,13 +14,19 @@ const BrowserTask = () => {
     usePageTitle();
     const loadedTasks = useLoaderData();
     const [tasks, setTasks] = useState(loadedTasks);
-    const [viewType, setViewType] = useState('table');
+
+    // Persist view type (table/card) in localStorage
+    const [viewType, setViewType] = useState(() => {
+        return localStorage.getItem('taskViewType') || 'table';
+    });
+
     const location = useLocation();
     const pathname = location.pathname;
 
     const marginClass = pathname === '/browse-tasks' ? 'px-4 md:px-12 my-12' : '';
     const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-3';
 
+    // Fetch tasks with sorting
     const fetchSortedTasks = async (order = 'desc') => {
         try {
             const res = await fetch(`http://localhost:3000/tasks-nest/sort?order=${order}&sortBy=formateDate`);
@@ -56,18 +62,22 @@ const BrowserTask = () => {
                     </h2>
 
                     <div className="flex items-center gap-4 mt-4 md:mt-0">
-                        {/* Sort Button */}
+                        {/* Sort Select */}
                         <select
                             onChange={(e) => fetchSortedTasks(e.target.value)}
-                            className="select select-bordered text-sm px-4 py-2 rounded"
+                            className="select select-bordered text-sm px-8 py-2 rounded"
                         >
                             <option value="desc">Newest First</option>
                             <option value="asc">Oldest First</option>
                         </select>
 
-                        {/* Toggle View */}
+                        {/* View Toggle Button */}
                         <button
-                            onClick={() => setViewType(viewType === 'table' ? 'card' : 'table')}
+                            onClick={() => {
+                                const newView = viewType === 'table' ? 'card' : 'table';
+                                setViewType(newView);
+                                localStorage.setItem('taskViewType', newView);
+                            }}
                             className="flex items-center gap-2 btn btn-primary text-white px-4 py-2 rounded-lg shadow hover:btn-outline transition-all duration-300"
                         >
                             {viewType === 'table' ? <FaTh /> : <FaList />}
@@ -77,8 +87,13 @@ const BrowserTask = () => {
                 </div>
             </Fade>
 
-            {/* View Mode */}
-            <Fade direction="down" triggerOnce>
+            {/* Task View Rendering */}
+            <Fade direction="down"
+                triggerOnce
+                delay={200} // Wait 200ms before starting
+                duration={1000} // Animation lasts 1 second
+                fraction={0.5}
+            >
                 {viewType === 'table' ? (
                     <div className="overflow-x-auto rounded border border-indigo-200 dark:border-indigo-600 bg-white dark:bg-gray-800 shadow">
                         <table className="min-w-full table-auto border-collapse text-sm md:text-base">
@@ -112,41 +127,44 @@ const BrowserTask = () => {
                     // Card View
                     <div className={`grid grid-cols-1 sm:grid-cols-2 ${gridCols} gap-6`}>
                         {tasks.map((task, index) => (
-                            <div
-                                key={index}
-                                className="bg-white dark:bg-gray-700 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden group"
+                            <Fade key={index}
+                                triggerOnce
+                                duration={1000} // Animation lasts 1 second
+                                fraction={0.5}
                             >
-                                {/* Image */}
-                                {task.image && (
-                                    <img
-                                        src={task.image}
-                                        alt={task.title}
-                                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                )}
+                                <div
+                                    className="bg-white dark:bg-gray-700 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden group"
+                                >
+                                    {task.image && (
+                                        <img
+                                            src={task.image}
+                                            alt={task.title}
+                                            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    )}
 
-                                {/* Content */}
-                                <div className="p-4">
-                                    <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
-                                        {task.title.slice(0, 25)}...
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
-                                    <div className="mt-4">
-                                        <Link
-                                            to={`/dashboard/browse-tasks/${task._id}`}
-                                            className="btn btn-primary btn-outline px-4 py-2 rounded hover:btn-outline"
-                                        >
-                                            View / Bid
-                                        </Link>
+                                    <div className="p-4">
+                                        <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
+                                            {task.title.slice(0, 25)}...
+                                        </h3>
+                                        <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
+                                        <div className="mt-4">
+                                            <Link
+                                                to={`/dashboard/browse-tasks/${task._id}`}
+                                                className="btn btn-primary btn-outline px-4 py-2 rounded hover:btn-outline"
+                                            >
+                                                View / Bid
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Fade>
                         ))}
                     </div>
                 )}
             </Fade>
-        </motion.div>
+        </motion.div >
     );
 };
 

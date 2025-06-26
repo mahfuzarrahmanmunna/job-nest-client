@@ -16,6 +16,8 @@ import WhyChose from './WhyChose';
 import usePageTitle from '../../Hooks/usePageTitle';
 import JoinUsSection from './JoinUsSection';
 import Fallback from '../../Components/Fallback/Fallback';
+import HighestBidTasks from './HighestBidTasks';
+import SuccessStories from './SuccessStories';
 
 
 const Home = () => {
@@ -54,6 +56,10 @@ const Home = () => {
                 <Featured featured={featured} />
             </section>
 
+            <section>
+                <HighestBidTasks />
+            </section>
+
             {/* Top Categories Section */}
             <section className="bg-indigo-100 dark:bg-gradient-to-b from-neutral-900 to-neutral-800  py-16 px-4 md:px-8 lg:px-12 pb-16">
                 <TopCategory />
@@ -71,6 +77,10 @@ const Home = () => {
             {/* Why Choose Us Section */}
             <section className="bg-white  dark:bg-gradient-to-b from-neutral-700 to-neutral-800 py-16 px-4 md:px-8 lg:px-12 pb-16">
                 <WhyChose />
+            </section>
+
+            <section>
+                <SuccessStories />
             </section>
             {/* Our Mission */}
             <section className="bg-white dark:bg-gradient-to-b from-neutral-800 to-neutral-800 py-12 px-4 md:px-8 lg:px-12 pb-16">

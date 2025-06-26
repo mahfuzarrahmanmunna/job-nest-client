@@ -4,7 +4,7 @@ import { FaQuestionCircle, FaInfoCircle, FaBug, FaHeadset } from 'react-icons/fa
 
 const Support = () => {
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 md:px-16 py-16 lg:px-24">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 md:px-12 py-16 ">
             {/* Page Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -12,7 +12,7 @@ const Support = () => {
                 transition={{ duration: 0.6 }}
                 className="text-center mb-16"
             >
-                <h1 className="text-4xl md:text-5xl font-bold text-indigo-700 dark:text-white mb-4">
+                <h1 className="text-2xl md:text-4xl font-bold text-primary dark:text-white mb-4">
                     We're Here to Help
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ const Support = () => {
                         className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition hover:-translate-y-1"
                         whileHover={{ scale: 1.03 }}
                     >
-                        <div className="text-indigo-600 dark:text-indigo-400 mb-4 flex justify-center animate-pulse">
+                        <div className="text-primary dark:text-indigo-400 mb-4 flex justify-center animate-pulse">
                             {item.icon}
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 dark:text-white text-center mb-2">{item.title}</h3>
