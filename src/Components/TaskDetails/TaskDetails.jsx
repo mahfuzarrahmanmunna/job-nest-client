@@ -96,7 +96,7 @@ const TaskDetails = () => {
                     </Fade>
 
                     <Fade cascade damping={0.1}>
-                        <p className="text-gray-700 dark:text-gray-200 mb-2">
+                        <div className="text-gray-700 dark:text-gray-200 mb-2">
                             <strong>Posted by:</strong> {name}
                             <span
                                 data-tooltip-id="email-tooltip"
@@ -107,7 +107,7 @@ const TaskDetails = () => {
                                 (contact)
                             </span>
                             <Tooltip id="email-tooltip" />
-                        </p>
+                        </div>
 
                         <p className="text-gray-700 dark:text-gray-200 mb-2">
                             <strong>Category:</strong> {category}

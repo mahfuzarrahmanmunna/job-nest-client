@@ -15,19 +15,40 @@ const SignIn = () => {
 
     const provider = new GoogleAuthProvider();
 
-    const handleGoogle = () => {
-        signinWithGoogle(provider)
-            .then(result => {
-                const user = result.user;
-                // console.log(user?.photoURL);
-                toast.success(`Logged in as ${user.displayName}`)
-                navigate(location.state || '/')
-            })
-            .catch(err => {
-                toast.error("Google Sign-in Failed")
-                console.error(err.code)
-            })
-    }
+    const handleGoogle = async () => {
+        try {
+            const result = await signinWithGoogle(provider);
+            const user = result.user;
+
+            const signInInfo = {
+                uid: user?.uid,
+                email: user?.email,
+                displayName: user?.displayName,
+                photoURL: user?.photoURL,
+                lastSignInTime: user?.metadata?.lastSignInTime
+            };
+
+            // Send user data to database
+            const res = await fetch('http://localhost:3000/users', {
+                method: 'PATCH', // You can use PUT if your backend is updated for that
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(signInInfo)
+            });
+
+            const data = await res.json();
+            console.log('Google login user saved:', data);
+
+            toast.success(`Logged in as ${user.displayName}`);
+            navigate(location.state || '/');
+
+        } catch (err) {
+            console.error("Google Sign-in Failed:", err.code);
+            toast.error("Google Sign-in Failed");
+        }
+    };
+    
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -55,7 +76,7 @@ const SignIn = () => {
 
             // Save/update user to database
             const res = await fetch('http://localhost:3000/users', {
-                method: 'POST', // or use PUT/POST if your backend requires it
+                method: 'PATCH', // or use PUT/POST if your backend requires it
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -84,6 +105,7 @@ const SignIn = () => {
             });
         }
     };
+
 
 
     return (
