@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Fade } from 'react-awesome-reveal';
 import { Tooltip } from 'react-tooltip';
 import DatePicker from 'react-datepicker';
 import { useLoaderData } from 'react-router';
+import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Context/AuthContext';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
@@ -11,10 +12,9 @@ import usePageTitle from '../../Hooks/usePageTitle';
 import Fallback from '../../Components/Fallback/Fallback';
 
 const UpdatedMyPost = () => {
-    usePageTitle()
+    usePageTitle();
     const data = useLoaderData();
     const { user } = useContext(AuthContext);
-    // console.log('photo', user?.photoURL);
 
     const {
         title,
@@ -25,61 +25,90 @@ const UpdatedMyPost = () => {
         _id
     } = data || {};
 
-    const [titles, setTitles] = useState(title || '');
-    const [categories, setCategories] = useState(category || '');
-    const [dates, setDates] = useState(formateDate || new Date());
-    const [amount, setAmount] = useState(budget || '');
-    const [descriptions, setDescriptions] = useState(description || '');
+    const [date, setDate] = useState(new Date(formateDate));
 
-    const handleUpdatedTask = (e) => {
-        e.preventDefault();
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        reset,
+        formState: { errors, isSubmitting }
+    } = useForm({
+        defaultValues: {
+            title,
+            category,
+            budget,
+            description
+        }
+    });
 
-        const updatedData = {
-            title: titles,
-            category: categories,
-            budget: amount,
-            formateDate: dates,
-            description: descriptions,
+    useEffect(() => {
+        setValue('title', title);
+        setValue('category', category);
+        setValue('budget', budget);
+        setValue('description', description);
+    }, [title, category, budget, description, setValue]);
+
+    const imgbbKey = import.meta.env.VITE_IMGBB_KEY;
+
+    const onSubmit = async (data) => {
+        let imageURL = null;
+
+        if (data.image?.length > 0) {
+            const formData = new FormData();
+            formData.append('image', data.image[0]);
+
+            try {
+                const imgRes = await fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const imgData = await imgRes.json();
+                if (imgData.success) {
+                    imageURL = imgData.data.display_url;
+                }
+            } catch (error) {
+                console.error("Image upload failed", error);
+            }
+        }
+
+        const updatedTask = {
+            title: data.title,
+            category: data.category,
+            budget: data.budget,
+            formateDate: date.toLocaleDateString('en-CA'),
+            description: data.description,
+            image: imageURL || data.oldImage, // keep old image if not updated
             email: user?.email,
             name: user?.displayName
         };
 
-        // console.log("Updated Task Submitted:", updatedData);
-
-        // Updated data here functionality
         fetch(`https://freelance-task-marketplace-server.vercel.app/tasks-nest/${_id}`, {
-            method: "PUT",
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(updatedData)
+            body: JSON.stringify(updatedTask)
         })
             .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                if (data.matchedCount) {
-                    // console.log(data);
+            .then(result => {
+                if (result.matchedCount) {
                     Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Your Task has been updated",
+                        icon: 'success',
+                        title: 'Task updated successfully!',
+                        timer: 1500,
                         showConfirmButton: false,
-                        timer: 1500
+                        position: 'center'
                     });
+                    reset();
                 }
-                // console.log('updated data', data);
             })
-            .catch(err => {
-                const code = err.code;
-                console.log(code);
-            })
-
+            .catch(err => console.error("Update failed", err));
     };
 
     if (!data) {
-        return <Fallback />; // Assuming Fallback is a component that handles loading state or errors
+        return <Fallback />;
     }
-
 
     return (
         <motion.div
@@ -87,142 +116,126 @@ const UpdatedMyPost = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <form
-                onSubmit={handleUpdatedTask}
-                className="bg-white dark:bg-gray-800 rounded"
-            >
-                <Fade direction='down'>
-                    <h1 className="text-center text-3xl font-bold text-primary mb-2">
-                        Update Task
-                    </h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-800 rounded">
+                <Fade direction="down">
+                    <h1 className="text-center text-3xl font-bold text-primary mb-2">Update Task</h1>
                 </Fade>
-                <Fade direction='up'>
+                <Fade direction="up">
                     <p className="mb-10 text-center text-gray-600 dark:text-gray-200">
-                        Plan your workflow efficiently with a well-scheduled task.
+                        Edit and reschedule your task with ease.
                     </p>
                 </Fade>
 
                 <div className="lg:grid space-y-6 md:grid-cols-1 lg:grid-cols-2 px-4 gap-6">
-                    {/* Task Title */}
-                    <fieldset className="w-full fieldset">
-                        <label className="label dark:text-gray-200 font-semibold">
+
+                    {/* Title */}
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-200">
                             Task Title
-                            <span
-                                data-tooltip-id="title-tip"
-                                data-tooltip-content="Enter a descriptive task title"
-                                className="ml-1 cursor-pointer text-sm text-blue-500"
-                            >
-                                ⓘ
-                            </span>
+                            <span data-tooltip-id="title-tip" data-tooltip-content="Edit task title" className="ml-1 cursor-pointer text-sm text-blue-500">ⓘ</span>
                             <Tooltip id="title-tip" />
                         </label>
                         <input
-                            type="text"
-                            name="title"
-                            value={titles}
-                            onChange={(e) => setTitles(e.target.value)}
-                            className="input  dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
-                            placeholder="E.g. Build Landing Page"
-                            required
+                            {...register('title', { required: true })}
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
+                        {errors.title && <p className="text-red-500 text-sm">Title is required</p>}
                     </fieldset>
 
                     {/* Category */}
-                    <fieldset className="w-full fieldset">
-                        <label className="label dark:text-gray-200 font-semibold">Category</label>
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-200">Category</label>
                         <select
-                            name="category"
-                            value={categories}
-                            onChange={(e) => setCategories(e.target.value)}
-                            className="select dark:bg-gray-700 dark:text-gray-200 select-bordered w-full"
-                            required
+                            {...register('category', { required: true })}
+                            className="select select-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         >
                             <option value="">Select a Category</option>
-                            <option value="Web Development">Web Development</option>
-                            <option value="Design">Design</option>
-                            <option value="Content Writing">Content Writing</option>
-                            <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="Freelancer">Freelancer</option>
-                            <option value="Backend Developer">Backend Developer</option>
-                            <option value="Graphics Designer">Graphics Designer</option>
-                            <option value="Full Stack Developer">Full Stack Developer</option>
+                            <option>Web Development</option>
+                            <option>Design</option>
+                            <option>Content Writing</option>
+                            <option>Digital Marketing</option>
+                            <option>Freelancer</option>
+                            <option>Backend Developer</option>
+                            <option>Graphics Designer</option>
+                            <option>Full Stack Developer</option>
                         </select>
+                        {errors.category && <p className="text-red-500 text-sm">Category is required</p>}
                     </fieldset>
 
                     {/* Deadline */}
-                    <fieldset className="w-full fieldset">
-                        <label className="label dark:text-gray-200 font-bold">
-                            <span className="label-text">Deadline</span>
-                        </label>
+                    <fieldset className='fieldset w-full p-0'>
+                        <label className="label font-bold dark:text-gray-200">Deadline</label>
                         <DatePicker
-                            className="input dark:bg-gray-700 dark:text-gray-200 input-bordered w-full"
-                            selected={dates}
-                            onChange={(date) => setDates(date)}
+                            selected={date}
+                            onChange={(val) => setDate(val)}
                             dateFormat="yyyy-MM-dd"
-                            required
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
                     </fieldset>
 
                     {/* Budget */}
-                    <fieldset className="w-full fieldset">
-                        <label className="label dark:text-gray-200 font-semibold">Budget ($)</label>
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-200">Budget ($)</label>
                         <input
-                            type="text"
-                            name="budget"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            className="input  dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
-                            placeholder="E.g. 250"
-                            required
+                            type="number"
+                            {...register('budget', { required: true })}
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
+                        {errors.budget && <p className="text-red-500 text-sm">Budget is required</p>}
                     </fieldset>
 
-                    {/* User Email */}
-                    <fieldset className="w-full fieldset">
-                        <label className="label dark:text-gray-200 font-semibold">User Email</label>
+                    {/* Email */}
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-200">User Email</label>
                         <input
                             type="email"
-                            name="email"
-                            value={user?.email || ""}
-                            className="input  dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
+                            value={user?.email}
                             disabled
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
                     </fieldset>
 
-                    {/* User Name */}
-                    <fieldset className="w-full fieldset">
-                        <label className="label dark:text-gray-200 font-semibold">User Name</label>
+                    {/* Name */}
+                    <fieldset>
+                        <label className="label font-semibold dark:text-gray-200">User Name</label>
                         <input
                             type="text"
-                            name="name"
-                            value={user?.displayName || ""}
-                            className="input dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 input-bordered w-full"
+                            value={user?.displayName}
                             disabled
+                            className="input input-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                         />
                     </fieldset>
 
                     {/* Description */}
-                    <fieldset className="w-full fieldset col-span-2">
-                        <label className="label dark:text-gray-200 font-semibold">Description</label>
+                    <fieldset className="col-span-2">
+                        <label className="label font-semibold dark:text-gray-200">Description</label>
                         <textarea
-                            name="description"
-                            value={descriptions}
-                            onChange={(e) => setDescriptions(e.target.value)}
-                            className="textarea textarea-bordered dark:bg-gray-700 dark:placeholder:text-gray-200 dark:text-gray-200 dark:text-gray-200 w-full"
-                            placeholder="Brief description of the task..."
+                            {...register('description', { required: true })}
+                            className="textarea textarea-bordered dark:bg-gray-700 dark:text-gray-200 w-full"
                             rows={3}
-                            required
+                        ></textarea>
+                        {errors.description && <p className="text-red-500 text-sm">Description is required</p>}
+                    </fieldset>
+
+                    {/* Image Upload */}
+                    <fieldset className="col-span-2">
+                        <label className="label font-semibold dark:text-gray-200">Upload New Image</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            {...register('image')}
+                            className="file-input file-input-bordered w-full dark:bg-gray-700 dark:text-gray-200"
                         />
                     </fieldset>
                 </div>
 
-                {/* Submit Button */}
                 <div className="mt-8 px-4">
                     <motion.input
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         type="submit"
-                        value="Update Task"
+                        disabled={isSubmitting}
+                        value={isSubmitting ? "Updating..." : "Update Task"}
                         className="w-full btn btn-info btn-outline text-lg"
                     />
                 </div>

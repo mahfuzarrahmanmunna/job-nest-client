@@ -20,6 +20,8 @@ import PrivateRoutes from "../Provider/Private/PrivateRoutes";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import AddTask from "../Pages/AddTask/AddTask";
 import Profile from "../Pages/Dashboard/Profile/Profile";
+import Contact from "../Pages/Contact/Contact";
+import Support from "../Pages/Support/Support";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +55,14 @@ export const router = createBrowserRouter([
             {
                 path: '/about-us',
                 Component: AboutUs,
+            },
+            {
+                path: '/contact',
+                Component: Contact
+            },
+            {
+                path: '/support',
+                Component: Support
             },
         ],
     },

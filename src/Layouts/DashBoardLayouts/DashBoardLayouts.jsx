@@ -1,15 +1,17 @@
-import { use, useState } from 'react';
+import { useState, useContext } from 'react';
 import { LayoutDashboard } from 'lucide-react';
 import { BiLeftArrow, BiLogOut } from 'react-icons/bi';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { Outlet, NavLink, Link } from 'react-router'; // ✅ use react-router-dom not react-router
+import { Outlet, NavLink, Link } from 'react-router'; // ✅ Corrected
 import { BsPersonFillExclamation } from 'react-icons/bs';
 import { AuthContext } from '../../Context/AuthContext';
+// import ThemeSwitch from '../../Context/Theme/ThemeSwitch';
 import Swal from 'sweetalert2';
+import ThemeSwitch from '../../Context/Theme/ThemeSwitch';
 
 const DashBoardLayouts = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { user, logOutUser } = use(AuthContext)
+    const { user, logOutUser } = useContext(AuthContext);
 
     const handleLogOutUser = () => {
         logOutUser().then(() => {
@@ -30,7 +32,7 @@ const DashBoardLayouts = () => {
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
             {/* Mobile Navbar */}
-            <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-base-100 dark:bg-gray-900 shadow">
+            <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-base-100 dark:bg-gray-900 shadow sticky top-0 z-50">
                 <Link to="/" className="flex items-center gap-2">
                     <BiLeftArrow />
                     <span className="font-bold">Home</span>
@@ -43,10 +45,10 @@ const DashBoardLayouts = () => {
             {/* Sidebar */}
             <aside
                 className={`bg-gray-200 dark:bg-gray-900 p-6 w-64 transition-all z-50 duration-300 lg:block ${sidebarOpen ? 'block' : 'hidden'
-                    } fixed lg:static top-0 left-0 h-screen flex flex-col justify-between`} // ✅ h-screen + flex-col
+                    } fixed lg:static top-0 left-0 h-screen flex flex-col justify-between`}
             >
                 {/* Top Section */}
-                <div className=''>
+                <div>
                     <div className="flex justify-between items-center mb-6 lg:hidden">
                         <h2 className="text-lg font-bold">Dashboard</h2>
                         <button onClick={toggleSidebar} className="text-xl">✕</button>
@@ -60,6 +62,7 @@ const DashBoardLayouts = () => {
                             className="ml-2 w-24"
                         />
                     </Link>
+
                     <NavLink
                         to="/dashboard"
                         end
@@ -73,36 +76,68 @@ const DashBoardLayouts = () => {
                         <LayoutDashboard />
                         Dashboard
                     </NavLink>
+
                     <ul className="space-y-4 font-medium">
                         <li>
-                            <NavLink to="/dashboard/browse-tasks" className={({ isActive }) => isActive ? "text-primary underline btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                            <NavLink
+                                to="/dashboard/browse-tasks"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "text-primary underline btn btn-block"
+                                        : "text-gray-600 dark:text-white btn btn-block"
+                                }
+                            >
                                 Browse All Task
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/add-task" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                            <NavLink
+                                to="/dashboard/add-task"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "underline text-primary btn btn-block"
+                                        : "text-gray-600 dark:text-white btn btn-block"
+                                }
+                            >
                                 Add Task
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/my-posted-tasks" className={({ isActive }) => isActive ? "underline text-primary btn btn-block" : "text-gray-600 dark:text-white btn btn-block"}>
+                            <NavLink
+                                to="/dashboard/my-posted-tasks"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "underline text-primary btn btn-block"
+                                        : "text-gray-600 dark:text-white btn btn-block"
+                                }
+                            >
                                 My Posted Task
                             </NavLink>
                         </li>
                     </ul>
                 </div>
 
-                {/* Bottom Section - Profile and Logout */}
-                <div className="mt-6 border-t flex flex-col  border-indigo-300 dark:border-indigo-700 pt-4">
+                {/* Bottom Section */}
+                <div className="mt-6 border-t flex flex-col border-indigo-300 dark:border-indigo-700 pt-4">
                     <div className="mb-3 text-sm text-gray-600 dark:text-gray-300">
-                        Logged in as <span className="font-semibold">{user?.displayName.slice(0, 10)}...</span>
+                        Logged in as{' '}
+                        <span className="font-semibold">
+                            {user?.displayName ? user.displayName.slice(0, 10) + '...' : 'User'}
+                        </span>
                     </div>
+
+                    {/* Theme Switcher */}
+                    <div className="mb-2 flex justify-between items-center px-2 py-1 bg-base-200 dark:bg-gray-700 rounded">
+                        <span className="text-sm font-medium text-gray-700 dark:text-white">Theme</span>
+                        <ThemeSwitch />
+                    </div>
+
                     <div className="flex flex-col gap-2">
                         <Link to="/dashboard/my-profile" className="text-sm text-primary hover:underline dark:text-blue-400 flex btn btn-block">
                             <BsPersonFillExclamation /> Profile
                         </Link>
                         <button
-                            onClick={handleLogOutUser} // replace with actual logout logic
+                            onClick={handleLogOutUser}
                             className="text-sm flex items-center gap-2 btn text-red-600 hover:underline dark:text-red-400"
                         >
                             <BiLogOut /> Logout
@@ -110,6 +145,7 @@ const DashBoardLayouts = () => {
                     </div>
                 </div>
             </aside>
+
             {/* Main Content */}
             <main className="flex-1 p-6 mt-4 lg:mt-0 bg-base-100 dark:bg-gray-800 ml-0 lg:ml-0">
                 <Outlet />
