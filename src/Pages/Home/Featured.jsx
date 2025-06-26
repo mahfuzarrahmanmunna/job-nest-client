@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, use } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { Link } from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
+import Fallback from '../../Components/Fallback/Fallback';
 
 const Featured = ({ featured }) => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
+    const { loading } = use(AuthContext)
 
     // Sort by latest createdAt date
     const sortedTasks = [...(featured || [])].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -26,9 +29,12 @@ const Featured = ({ featured }) => {
         };
     }, []);
 
+    if (loading) {
+        return <Fallback />
+    }
     return (
         <div ref={sectionRef} >
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 md:px-12 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 {sortedTasks.length > 0 ? (
                     sortedTasks.map(task => (
                         <Link to={`/browse-tasks/${task._id}`} key={task._id}>

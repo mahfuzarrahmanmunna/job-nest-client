@@ -41,8 +41,8 @@ const HighestBidTasks = () => {
     }
 
     return (
-        <section className=" px-4 md:px-12 my-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-primary dark:text-white mb-10">
+        <section className="">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-primary dark:text-white mb-16">
                 Highest Bid Tasks
             </h2>
 
@@ -74,7 +74,7 @@ const HighestBidTasks = () => {
                             )}
                             <div className="mt-4 flex justify-between items-center ">
                                 <div className='flex items-center gap-1 dark:text-gray-200'>
-                                    <BiSolidLike className='text-primary'/> {task.bids}
+                                    <BiSolidLike className='text-primary' /> {task.bids}
                                 </div>
                                 <Link
                                     to={`/dashboard/browse-tasks/${task._id}`}

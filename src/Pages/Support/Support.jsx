@@ -118,7 +118,7 @@ const Support = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition"
+                            className="w-full py-3 px-6 btn btn-primary hover:btn-outline text-white rounded-lg font-semibold transition"
                         >
                             Submit Request
                         </button>

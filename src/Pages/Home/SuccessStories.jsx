@@ -18,7 +18,7 @@ const SuccessStories = () => {
     }
 
     return (
-        <section className="py-16 bg-indigo-50 dark:bg-neutral-800 px-4 md:px-12">
+        <section className="">
             <h2 className="text-3xl font-bold text-primary dark:text-white mb-10 text-center">Success Stories</h2>
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 ">
                 {testimonials.map((t, index) => (

@@ -9,7 +9,7 @@ const RootLayouts = () => {
             <div className='sticky top-0 dark:bg-gray-800 z-50 bg-transparent '>
                 <Navbar />
             </div>
-            <div className="min-h-[calc(100vh-300px)] bg-[url('https://example.com/image.jpg')] bg-cover bg-center">
+            <div className="min-h-[calc(100vh-300px)] dark:bg-gray-800 bg-[url('https://example.com/image.jpg')] bg-cover bg-center">
                 <Outlet />
             </div>
             <div>

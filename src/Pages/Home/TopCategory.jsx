@@ -8,8 +8,8 @@ import 'swiper/css/pagination';
 
 const TopCategory = () => {
     return (
-        <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-primary dark:text-white mb-10">Top Categories</h2>
+        <div className="text-center ">
+            <h2 className="text-3xl font-bold text-primary dark:text-white mb-16">Top Categories</h2>
             <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
