@@ -5,8 +5,10 @@ import { motion } from 'framer-motion';
 import { FaRegHandPaper, FaTasks, FaUserCheck, FaUsers } from 'react-icons/fa';
 import DashboardCard from '../../../Components/Dashboard/DashboardCard/DashboardCard';
 import RecentActivity from '../../../Components/Dashboard/RecentActivity/RecentActivity';
+import usePageTitle from '../../../Hooks/usePageTitle';
 
 const DashboardHome = () => {
+    usePageTitle()
     const { user } = useContext(AuthContext);
     const [totalTasks, setTotalTasks] = useState(0);
     const [myTasks, setMyTasks] = useState(0);

@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaQuestionCircle, FaInfoCircle, FaBug, FaHeadset } from 'react-icons/fa';
+import usePageTitle from '../../Hooks/usePageTitle';
 
 const Support = () => {
+    usePageTitle()
     return (
         <div className="min-h-screen  px-4 md:px-12 py-16 ">
             {/* Page Header */}

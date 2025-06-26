@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import usePageTitle from '../../../Hooks/usePageTitle';
 
 const Profile = () => {
+    usePageTitle()
     const { user, updateUser, setUser } = useContext(AuthContext);
 
     const {

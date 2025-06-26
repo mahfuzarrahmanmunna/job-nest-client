@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Users, ShieldCheck, Globe } from 'lucide-react';
+import usePageTitle from '../../Hooks/usePageTitle';
 
 const AboutUs = () => {
+    usePageTitle()
     return (
         <div className="max-w-6xl mx-auto px-4 md:px-12 py-10">
             <motion.div

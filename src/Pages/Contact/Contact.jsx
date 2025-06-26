@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import { BsSendFill } from 'react-icons/bs';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa'; // ⬅ Add at top if not already
+import usePageTitle from '../../Hooks/usePageTitle';
 
 const Contact = () => {
+    usePageTitle()
     return (
         <div className="min-h-screen py-16 px-4 md:px-16">
             {/* Header */}
