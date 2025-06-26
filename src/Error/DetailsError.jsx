@@ -37,7 +37,7 @@ const DetailsError = () => {
 
                     {/* Go Home button */}
                     <Link
-                        to="/browse-tasks"
+                        to="/dashboard/browse-tasks"
                         className="btn btn-primary transition"
                     >
                         <BiLeftArrow /> Go Back Browse all task

@@ -37,6 +37,24 @@ export const router = createBrowserRouter([
                 hydrateFallbackElement: <Fallback />,
             },
             {
+                path: 'browse-tasks',
+                Component: BrowserTask,
+                loader: () =>
+                    fetch('http://localhost:3000/tasks-nest'),
+                hydrateFallbackElement: <Fallback />,
+            },
+            {
+                path: 'browse-tasks/:id',
+                element: (
+                    <PrivateRoutes>
+                        <TaskDetails />
+                    </PrivateRoutes>
+                ),
+                loader: ({ params }) =>
+                    fetch(`http://localhost:3000/tasks-nest/${params.id}`),
+                hydrateFallbackElement: <Fallback />,
+            },
+            {
                 path: '/sign-up',
                 Component: SignUp,
             },

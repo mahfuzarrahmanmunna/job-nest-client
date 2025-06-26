@@ -26,7 +26,7 @@ const Navbar = () => {
                 <NavLink to="/" end className={({ isActive }) => isActive ? "underline text-primary font-semibold" : "text-gray-600 dark:text-white"}>Home</NavLink>
             </li>
             <li>
-                <NavLink to="/all-items" className={({ isActive }) => isActive ? "underline text-primary font-semibold" : "text-gray-600 dark:text-white"}>All Items</NavLink>
+                <NavLink to="/browse-tasks" className={({ isActive }) => isActive ? "underline text-primary font-semibold" : "text-gray-600 dark:text-white"}>All Items</NavLink>
             </li>
             <li>
                 <NavLink to="/about-us" className={({ isActive }) => isActive ? "underline text-primary font-semibold" : "text-gray-600 dark:text-white"}>About</NavLink>

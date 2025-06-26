@@ -55,17 +55,14 @@ const Sidebar = () => {
                         </button>
                     </div>
 
-                    <div className="flex justify-between items-center mb-6">
-                        <Link to="/" className="flex items-center">
-                            <BiLeftArrow className="text-base-content" />
-                            <img
-                                src="https://i.ibb.co/4gFKt7dG/Chat-GPT-Image-Jun-25-2025-10-13-36-PMcopy.png"
-                                alt="Logo"
-                                className="ml-2 w-24"
-                            />
-                        </Link>
-                        <ThemeSwitch />
-                    </div>
+                    <Link to="/" className="flex items-center mb-6">
+                        <BiLeftArrow className="text-base-content" />
+                        <img
+                            src="https://i.ibb.co/4gFKt7dG/Chat-GPT-Image-Jun-25-2025-10-13-36-PMcopy.png"
+                            alt="Logo"
+                            className="ml-2 w-24"
+                        />
+                    </Link>
 
                     <NavLink
                         to="/dashboard"

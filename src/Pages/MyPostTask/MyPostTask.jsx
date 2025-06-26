@@ -130,7 +130,7 @@ const MyPostTask = () => {
                     <p>
                         You haven't posted any tasks yet.
                     </p>
-                    <Link className='btn mt-2 btn-primary btn-outline inline-flex items-center gap-2' to='/add-task'>
+                    <Link className='btn mt-2 btn-primary btn-outline inline-flex items-center gap-2' to='/dashboard/add-task'>
                         <BiLeftArrow /> Go Back & Post Data
                     </Link>
                 </motion.div>

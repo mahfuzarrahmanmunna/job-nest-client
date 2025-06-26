@@ -81,7 +81,7 @@ const AddTask = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-800 rounded">
+            <form onSubmit={handleSubmit(onSubmit)} className="rounded">
                 <Fade direction="down">
                     <h1 className="text-center text-3xl font-bold text-primary mb-2">Add New Task</h1>
                 </Fade>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData, useLocation } from 'react-router';
 import TaskTable from './TaskTable';
 import { Typewriter } from 'react-simple-typewriter';
 import { Fade } from 'react-awesome-reveal';
@@ -13,7 +13,12 @@ import { FaList, FaTh } from 'react-icons/fa';
 const BrowserTask = () => {
     usePageTitle();
     const tasks = useLoaderData();
-    const [viewType, setViewType] = useState('table'); // table or card
+    const [viewType, setViewType] = useState('table');
+    const location = useLocation();
+    const pathname = location.pathname;
+
+    const marginClass = pathname === '/browse-tasks' ? 'px-4 md:px-12 my-12' : '';
+    const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 
     if (!tasks) return <Fallback />;
 
@@ -22,11 +27,11 @@ const BrowserTask = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="rounded-xl"
+            className={`rounded-xl ${marginClass}`}
         >
-            {/* Section Title with Typewriter */}
+            {/* Section Title */}
             <Fade direction="up" cascade damping={0.1}>
-                <div className="md:flex justify-between items-center mb-6">
+                <div className="md:flex justify-between items-center mb-12">
                     <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-indigo-400">
                         <Typewriter
                             words={['Available Freelance Tasks', 'Browse and Bid Now']}
@@ -83,16 +88,37 @@ const BrowserTask = () => {
                     </div>
                 ) : (
                     // Card View
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 ${gridCols} gap-6`}>
                         {tasks.map((task, index) => (
-                            <div key={index} className="bg-white dark:bg-gray-800 border border-indigo-200 dark:border-indigo-600 rounded-lg p-4 shadow hover:shadow-lg transition-all">
-                                <h3 className="text-lg font-bold text-primary dark:text-indigo-300">{task.title.slice(0, 30)}...</h3>
-                                <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
-                                <div className="mt-4">
-                                    <Link to={`/dashboard/browse-tasks/${task._id}`} className="btn btn-primary  btn-outline px-4 py-2 rounded hover:btn-outline">
-                                        View / Bid
-                                    </Link>
+                            <div
+                                key={index}
+                                className="bg-white dark:bg-gray-800 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden"
+                            >
+                                {/* Image */}
+                                {task.image && (
+                                    <img
+                                        src={task.image}
+                                        alt={task.title}
+                                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                )}
+                                {/* Content */}
+                                <div className="p-4">
+                                    <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
+                                        {task.title.slice(0, 30)}...
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        Category: {task.category}
+                                    </p>
+                                    <div className="mt-4">
+                                        <Link
+                                            to={`/dashboard/browse-tasks/${task._id}`}
+                                            className="btn btn-primary btn-outline px-4 py-2 rounded hover:btn-outline"
+                                        >
+                                            View / Bid
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         ))}

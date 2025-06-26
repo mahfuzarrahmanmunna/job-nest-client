@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const TaskTable = ({ task, index }) => {
     // console.log(index, task);
     const { name, title, category, _id } = task
-    console.log(_id);
+    // console.log(_id);
     return (
         <motion.tr
             className="text-center border-t  hover:bg-indigo-50 dark:hover:bg-gray-700"
