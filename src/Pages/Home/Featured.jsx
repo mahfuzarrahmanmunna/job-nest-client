@@ -27,8 +27,8 @@ const Featured = ({ featured }) => {
     }, []);
 
     return (
-        <div ref={sectionRef} className="px-4 md:px-8 lg:px-12">
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div ref={sectionRef} >
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 md:px-12 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 {sortedTasks.length > 0 ? (
                     sortedTasks.map(task => (
                         <Link to={`/browse-tasks/${task._id}`} key={task._id}>

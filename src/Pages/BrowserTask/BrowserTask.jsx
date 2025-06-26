@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData, useLocation } from 'react-router';
 import TaskTable from './TaskTable';
 import { Typewriter } from 'react-simple-typewriter';
@@ -12,13 +12,24 @@ import { FaList, FaTh } from 'react-icons/fa';
 
 const BrowserTask = () => {
     usePageTitle();
-    const tasks = useLoaderData();
+    const loadedTasks = useLoaderData();
+    const [tasks, setTasks] = useState(loadedTasks);
     const [viewType, setViewType] = useState('table');
     const location = useLocation();
     const pathname = location.pathname;
 
     const marginClass = pathname === '/browse-tasks' ? 'px-4 md:px-12 my-12' : '';
     const gridCols = pathname === '/browse-tasks' ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-3';
+
+    const fetchSortedTasks = async (order = 'desc') => {
+        try {
+            const res = await fetch(`http://localhost:3000/tasks-nest/sort?order=${order}&sortBy=formateDate`);
+            const data = await res.json();
+            setTasks(data);
+        } catch (err) {
+            console.error('Error fetching sorted tasks:', err);
+        }
+    };
 
     if (!tasks) return <Fallback />;
 
@@ -31,7 +42,7 @@ const BrowserTask = () => {
         >
             {/* Section Title */}
             <Fade direction="up" cascade damping={0.1}>
-                <div className="md:flex justify-between items-center mb-12">
+                <div className="md:flex justify-between items-center mb-6">
                     <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-indigo-400">
                         <Typewriter
                             words={['Available Freelance Tasks', 'Browse and Bid Now']}
@@ -44,18 +55,29 @@ const BrowserTask = () => {
                         />
                     </h2>
 
-                    {/* Toggle View Button */}
-                    <button
-                        onClick={() => setViewType(viewType === 'table' ? 'card' : 'table')}
-                        className="flex items-center gap-2 btn btn-primary text-white px-4 py-2 rounded-lg shadow hover:btn-outline transition-all duration-300 mt-2 md:mt-0"
-                    >
-                        {viewType === 'table' ? <FaTh /> : <FaList />}
-                        {viewType === 'table' ? 'Card View' : 'Table View'}
-                    </button>
+                    <div className="flex items-center gap-4 mt-4 md:mt-0">
+                        {/* Sort Button */}
+                        <select
+                            onChange={(e) => fetchSortedTasks(e.target.value)}
+                            className="select select-bordered text-sm px-4 py-2 rounded"
+                        >
+                            <option value="desc">Newest First</option>
+                            <option value="asc">Oldest First</option>
+                        </select>
+
+                        {/* Toggle View */}
+                        <button
+                            onClick={() => setViewType(viewType === 'table' ? 'card' : 'table')}
+                            className="flex items-center gap-2 btn btn-primary text-white px-4 py-2 rounded-lg shadow hover:btn-outline transition-all duration-300"
+                        >
+                            {viewType === 'table' ? <FaTh /> : <FaList />}
+                            {viewType === 'table' ? 'Card View' : 'Table View'}
+                        </button>
+                    </div>
                 </div>
             </Fade>
 
-            {/* Conditional Rendering */}
+            {/* View Mode */}
             <Fade direction="down" triggerOnce>
                 {viewType === 'table' ? (
                     <div className="overflow-x-auto rounded border border-indigo-200 dark:border-indigo-600 bg-white dark:bg-gray-800 shadow">
@@ -92,7 +114,7 @@ const BrowserTask = () => {
                         {tasks.map((task, index) => (
                             <div
                                 key={index}
-                                className="bg-white dark:bg-gray-700  border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden"
+                                className="bg-white dark:bg-gray-700 border border-indigo-200 dark:border-indigo-600 rounded-lg shadow hover:shadow-xl transition-all overflow-hidden group"
                             >
                                 {/* Image */}
                                 {task.image && (
@@ -102,15 +124,14 @@ const BrowserTask = () => {
                                         className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
                                 )}
+
                                 {/* Content */}
                                 <div className="p-4">
                                     <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
                                         {task.title.slice(0, 25)}...
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name}</p>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                        Category: {task.category}
-                                    </p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
                                     <div className="mt-4">
                                         <Link
                                             to={`/dashboard/browse-tasks/${task._id}`}

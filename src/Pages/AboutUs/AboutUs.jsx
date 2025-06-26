@@ -4,7 +4,7 @@ import { Briefcase, Users, ShieldCheck, Globe } from 'lucide-react';
 
 const AboutUs = () => {
     return (
-        <div className="max-w-6xl mx-auto px-4 py-10">
+        <div className="max-w-6xl mx-auto px-4 md:px-12 py-10">
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}

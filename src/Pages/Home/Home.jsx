@@ -49,7 +49,7 @@ const Home = () => {
             </section>
 
             {/* Featured Tasks */}
-            <section className="px-4 md:px-8 lg:px-12 pb-16">
+            <section className="">
                 <h2 className="text-3xl font-bold text-primary dark:text-white  mb-6">Featured Tasks</h2>
                 <Featured featured={featured} />
             </section>

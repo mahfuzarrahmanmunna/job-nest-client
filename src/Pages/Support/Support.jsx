@@ -71,52 +71,59 @@ const Support = () => {
             </motion.div>
 
             {/* Help Form */}
-            <div className="mt-20 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md max-w-4xl mx-auto">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">
-                    Still Need Help? Contact Us
-                </h2>
-                <form className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
+            <div className='md:flex gap-8 justify-between items-center mt-20'>
+                <div className='md:w-1/3'>
+                    <figure>
+                        <img src="https://i.ibb.co/hR7ChDv5/pexels-mikhail-nilov-7534385-removebg-preview.png" alt="" />
+                    </figure>
+                </div>
+                <div className=" bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md max-w-4xl md:w-2/3">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">
+                        Still Need Help? Contact Us
+                    </h2>
+                    <form className="space-y-6">
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                                <input
+                                    type="text"
+                                    placeholder="Jane Doe"
+                                    className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                <input
+                                    type="email"
+                                    placeholder="you@example.com"
+                                    className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600"
+                                />
+                            </div>
+                        </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
                             <input
                                 type="text"
-                                placeholder="Jane Doe"
+                                placeholder="Describe your issue briefly"
                                 className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                            <input
-                                type="email"
-                                placeholder="you@example.com"
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                            <textarea
+                                rows="5"
+                                placeholder="Write your message..."
                                 className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600"
-                            />
+                            ></textarea>
                         </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
-                        <input
-                            type="text"
-                            placeholder="Describe your issue briefly"
-                            className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
-                        <textarea
-                            rows="5"
-                            placeholder="Write your message..."
-                            className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600"
-                        ></textarea>
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition"
-                    >
-                        Submit Request
-                    </button>
-                </form>
+                        <button
+                            type="submit"
+                            className="w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition"
+                        >
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

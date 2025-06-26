@@ -130,12 +130,17 @@ const Sidebar = () => {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Link
+                            <NavLink
                                 to="/dashboard/my-profile"
-                                className="btn btn-block text-sm flex items-center gap-2 bg-base-100 text-primary hover:underline"
+                                className={({ isActive }) =>
+                                    `btn btn-block ${isActive
+                                        ? 'text-primary underline bg-base-300'
+                                        : 'text-base-content dark:text-white bg-base-100 hover:bg-base-300 dark:bg-gray-700 dark:hover:bg-gray-800'
+                                    }`
+                                }
                             >
                                 <BsPersonFillExclamation /> Profile
-                            </Link>
+                            </NavLink>
                             <button
                                 onClick={handleLogOutUser}
                                 className="btn btn-block text-sm flex items-center gap-2 bg-red-100 text-red-600 hover:underline dark:bg-red-800 dark:text-white"
