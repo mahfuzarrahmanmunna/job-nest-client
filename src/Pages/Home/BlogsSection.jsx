@@ -72,14 +72,6 @@ const BlogsSection = () => {
                                 <span>By {blog.author}</span>
                                 <span>{blog.date}</span>
                             </div>
-                            <div className="pt-2">
-                                <Link
-                                    to={`/`}
-                                    className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline"
-                                >
-                                    Read More →
-                                </Link>
-                            </div>
                         </div>
                     </motion.div>
                 ))}
