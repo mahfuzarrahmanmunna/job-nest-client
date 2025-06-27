@@ -1,36 +1,40 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
-import { Fade } from 'react-awesome-reveal';
-import { Link, useLoaderData } from 'react-router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
-import Faqs from './Faqs';
-import Featured from './Featured';
-import HeroSection from './HeroSection';
-import TopCategory from './TopCategory';
-import WhyChose from './WhyChose';
 import usePageTitle from '../../Hooks/usePageTitle';
-import JoinUsSection from './JoinUsSection';
-import Fallback from '../../Components/Fallback/Fallback';
+import HeroSection from './HeroSection';
+import Featured from './Featured';
 import HighestBidTasks from './HighestBidTasks';
+import TopCategory from './TopCategory';
+import BlogsSection from './BlogsSection';
+import Faqs from './Faqs';
+import WhyChose from './WhyChose';
 import SuccessStories from './SuccessStories';
 import HowItWorks from './HowItWorks';
 import PlatformStats from './PlatformStats';
+import JoinUsSection from './JoinUsSection';
+import Fallback from '../../Components/Fallback/Fallback';
+import { useLoaderData } from 'react-router';
+
+const sectionAnim = {
+    initial: { opacity: 0, y: 40 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 },
+    viewport: { once: false, amount: 0.2 },
+};
 
 const Home = () => {
     usePageTitle();
     const featured = useLoaderData();
 
-    if (!featured) {
-        return <Fallback />;
-    }
+    if (!featured) return <Fallback />;
 
     return (
         <div className="min-h-screen text-center">
-            {/* Hero Section */}
             <HeroSection />
 
             {/* Banner Slider */}
@@ -54,26 +58,25 @@ const Home = () => {
                 </Swiper>
             </section>
 
-            {/* Main Content with Consistent Vertical Spacing */}
             <div className="space-y-16 px-4 md:px-8 lg:px-12 py-16">
-                {/* Featured Tasks */}
-                <section >
+                <motion.section {...sectionAnim}>
                     <h2 className="text-3xl font-bold text-primary mb-16 dark:text-white">Featured Tasks</h2>
                     <Featured featured={featured} />
-                </section>
+                </motion.section>
 
-                {/* Highest Bid Tasks */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <HighestBidTasks />
-                </section>
+                </motion.section>
 
-                {/* Top Categories */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <TopCategory />
-                </section>
+                </motion.section>
 
-                {/* FAQs */}
-                <section className="lg:flex justify-between">
+                <motion.section {...sectionAnim}>
+                    <BlogsSection />
+                </motion.section>
+
+                <motion.section {...sectionAnim} className="lg:flex justify-between">
                     <div className="w-full lg:w-1/3 flex justify-center">
                         <iframe
                             className="h-96 w-96"
@@ -84,42 +87,36 @@ const Home = () => {
                     <div className="space-y-4 max-w-4xl mx-auto mt-8 lg:mt-0">
                         <Faqs />
                     </div>
-                </section>
+                </motion.section>
 
-                {/* Why Choose Us */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <WhyChose />
-                </section>
+                </motion.section>
 
-                {/* Testimonials */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <SuccessStories />
-                </section>
+                </motion.section>
 
-                {/* How It Works */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <HowItWorks />
-                </section>
+                </motion.section>
 
-                {/* Platform Stats */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <PlatformStats />
-                </section>
+                </motion.section>
 
-                {/* Our Mission */}
-                <section className="bg-white dark:bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl py-12">
+                <motion.section {...sectionAnim} className="bg-white dark:bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl py-12">
                     <div className="max-w-4xl mx-auto text-center">
                         <h2 className="text-3xl font-bold text-primary dark:text-white mb-4">Our Mission</h2>
                         <p className="text-gray-600 dark:text-gray-100 text-lg">
                             To empower freelancers and employers by creating a safe, efficient, and fair digital workspace where skills and opportunities meet.
                         </p>
                     </div>
-                </section>
+                </motion.section>
 
-                {/* Join Us */}
-                <section>
+                <motion.section {...sectionAnim}>
                     <JoinUsSection />
-                </section>
+                </motion.section>
             </div>
         </div>
     );

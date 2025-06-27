@@ -150,7 +150,7 @@ const BrowserTask = () => {
                                         <h3 className="text-lg font-bold text-primary dark:text-indigo-300">
                                             {task.title.slice(0, 20)}...
                                         </h3>
-                                        <p className="text-gray-600 dark:text-gray-300 mb-2">By: {task.name.slice(0, 20)}...</p>
+                                        <p className="text-gray-600 dark:text-gray-300 mb-2">{task.description.slice(0, 50)}...</p>
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Category: {task.category}</p>
                                         <div className="mt-4">
                                             <Link

@@ -27,7 +27,8 @@ const TaskDetails = () => {
         formateDate,
         email,
         name,
-        bids
+        bids,
+        image
     } = task || {};
     // console.log(formateDate);
     // const updatedTime = formateDate.replace('T00:00:00.000Z', '')
@@ -77,8 +78,8 @@ const TaskDetails = () => {
             <div className="flex flex-col lg:flex-row gap-10 items-center">
                 {/* Lottie Animation */}
                 <Fade direction='up' className="w-full lg:w-1/2">
-                    <iframe
-                        src="https://lottie.host/embed/db733a44-32c1-479a-8202-f642a7e11633/WC4GLDRZH8.lottie"
+                    <img
+                        src={image}
                         className="w-full h-60 rounded-xl"
                         title="Task Animation"
                         frameBorder="0"
