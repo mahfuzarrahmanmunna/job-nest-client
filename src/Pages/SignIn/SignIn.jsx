@@ -18,6 +18,7 @@ const SignIn = () => {
     const handleGoogle = async () => {
         try {
             const result = await signinWithGoogle(provider);
+            navigate(location.state || '/');
             const user = result.user;
 
             const signInInfo = {

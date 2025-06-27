@@ -18,7 +18,7 @@ import HowItWorks from './HowItWorks';
 import PlatformStats from './PlatformStats';
 import JoinUsSection from './JoinUsSection';
 import Fallback from '../../Components/Fallback/Fallback';
-import { useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router-dom';
 
 const sectionAnim = {
     initial: { opacity: 0, y: 40 },
@@ -106,7 +106,7 @@ const Home = () => {
                 </motion.section>
 
                 <motion.section {...sectionAnim} className="bg-white dark:bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl py-12">
-                    <div className="max-w-4xl mx-auto text-center">
+                    <div className="max-w-4xl mx-auto text-center px-2">
                         <h2 className="text-3xl font-bold text-primary dark:text-white mb-4">Our Mission</h2>
                         <p className="text-gray-600 dark:text-gray-100 text-lg">
                             To empower freelancers and employers by creating a safe, efficient, and fair digital workspace where skills and opportunities meet.

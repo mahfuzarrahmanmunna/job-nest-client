@@ -1,49 +1,41 @@
-import React, { useState, useEffect, useRef, use } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom'; // ✅ CORRECT import
 import { AuthContext } from '../../Context/AuthContext';
 import Fallback from '../../Components/Fallback/Fallback';
 
 const Featured = ({ featured }) => {
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible] = useState(true); // Always visible
     const sectionRef = useRef(null);
-    const { loading } = use(AuthContext)
-    console.log(featured);
+    const { loading } = useContext(AuthContext);
 
-    // Sort by latest createdAt date
-    const sortedTasks = [...(featured || [])].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    console.log('FEATURED:', featured); // ✅ Debugging
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.5 }
-        );
+    const sortedTasks = [...(featured || [])].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
 
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => {
-            if (sectionRef.current) observer.unobserve(sectionRef.current);
-        };
-    }, []);
+    if (loading) return <Fallback />;
 
-    if (loading) {
-        return <Fallback />
-    }
     return (
-        <div ref={sectionRef} >
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div
+            ref={sectionRef}
+            className="z-10 relative"
+        >
+            <div
+                className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            >
                 {sortedTasks.length > 0 ? (
-                    sortedTasks.map(task => (
-                        <Link to={`/dashboard/browse-tasks/${task._id}`} key={task._id}>
+                    sortedTasks.map((task) => (
+                        <Link
+                            to={`/dashboard/browse-tasks/${task._id}`}
+                            key={task._id}
+                        >
                             <motion.div
                                 className="group bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300"
                                 whileHover={{ scale: 1.02 }}
                             >
-                                {/* Image */}
                                 {task.image && (
                                     <div className="overflow-hidden h-48">
                                         <img
@@ -53,8 +45,6 @@ const Featured = ({ featured }) => {
                                         />
                                     </div>
                                 )}
-
-                                {/* Content */}
                                 <div className="p-5">
                                     <h3 className="text-xl font-bold text-primary dark:text-indigo-300 mb-1">
                                         {task.title.slice(0, 30)}...
